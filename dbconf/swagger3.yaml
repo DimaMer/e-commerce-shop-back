@@ -1,0 +1,396 @@
+swagger: "2.0"
+info:
+  title: Ecomerse Api
+  description: API.
+  version: 1.0.0
+host: localhost:7000
+basePath: /api
+schemes:
+  - http
+paths:
+  /gallery:
+    get:
+      tags:
+        - "gallery"
+      summary: Returns all gallery.
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#'
+  /gallery/single:
+    get:
+      tags:
+        - "gallery"
+      summary: "Find single gallery"
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "finditemByData"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "gallery Id"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#"
+        400:
+          description: "Invalid status value"
+    post:
+      tags:
+        - "gallery"
+      summary: "Add gallery in the store with form data"
+      description: ""
+      operationId: "updatePetWithForm"
+      consumes:
+        - form-data
+      produces:
+        - "application/json"
+      parameters:
+        - name: "photo"
+          in: "formData"
+          description: "add photo of the gallery"
+          required: false
+          type: file
+      responses:
+        405:
+          description: "Invalid input"
+    put:
+      tags:
+        - "gallery"
+      summary: "Updated gallery"
+      description: "This can only be done by the logged in gallery."
+      operationId: "updateItem"
+      produces:
+        - "application/json"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "gallery Id"
+          required: true
+          type: "string"
+      responses:
+        400:
+          description: "Invalid gallery supplied"
+        404:
+          description: "gallery not found"
+    delete:
+      tags:
+        - "gallery"
+      summary: "Deletes a gallery"
+      description: ""
+      operationId: "delete gallery"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "delete - gallery - id"
+          required: true
+          type: "string"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "gallery not found"
+  /item:
+    get:
+      tags:
+        - "item"
+      summary: Returns all item.
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#'
+  /item/single:
+    get:
+      tags:
+        - "item"
+      summary: "Find single item"
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "finditemByData"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "itemId"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#"
+        400:
+          description: "Invalid status value"
+    post:
+      tags:
+        - "item"
+      summary: "Add item in the store with form data"
+      description: ""
+      operationId: "updatePetWithForm"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "nameItem"
+          in: "formData"
+          description: "add name of the Item"
+          required: false
+          type: "string"
+      responses:
+        405:
+          description: "Invalid input"
+    put:
+      tags:
+        - "item"
+      summary: "Updated item"
+      description: "This can only be done by the logged in item."
+      operationId: "updateItem"
+      produces:
+        - "application/json"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "itemId"
+          required: true
+          type: "string"
+      responses:
+        400:
+          description: "Invalid item supplied"
+        404:
+          description: "Item not found"
+    delete:
+      tags:
+        - "item"
+      summary: "Deletes a Item"
+      description: ""
+      operationId: "delete Item"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "delete - item - id"
+          required: true
+          type: "string"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Item not found"
+  /user/login:
+    post:
+      tags:
+        - "user"
+      summary: login to site.
+      description: ""
+      operationId: "updatePetWithForm"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "email"
+          in: "formData"
+          description: "dima@gmail.com"
+          required: true
+          type: "string"
+        - name: "password"
+          in: "formData"
+          description: "1111"
+          required: true
+          type: "string"
+      responses:
+        405:
+          description: "Invalid input"
+  /user/logout:
+    get:
+      tags:
+        - "user"
+      summary: logout user.
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#'
+  /user:
+    get:
+      tags:
+        - "user"
+      summary: Returns all user.
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#'
+  /user/single:
+    get:
+      tags:
+        - "user"
+      summary: "Find single user"
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "findAdminByData"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "5dd66a92f3a23a1b4065fa2a"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#"
+        400:
+          description: "Invalid status value"
+    post:
+      tags:
+        - "user"
+      summary: "Add User in the store with form data"
+      description: ""
+      operationId: "updatePetWithForm"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "firstName"
+          in: "formData"
+          description: "add name of the User"
+          required: false
+          type: "string"
+        - name: "lastName"
+          in: "formData"
+          description: "add name of the User"
+          required: false
+          type: "string"
+        - name: "email"
+          in: "formData"
+          description: "add email of the User"
+          required: false
+          type: "string"
+        - name: "phone"
+          in: formData
+          description: "add email of the User"
+          required: false
+          type: "string"
+        - name: "password"
+          in: "formData"
+          description: "add password of the User"
+          required: false
+          type: "string"
+        - name: "role"
+          in: "formData"
+          description: "role"
+          required: false
+          type: "string"
+      responses:
+        405:
+          description: "Invalid input"
+    put:
+      tags:
+        - "user"
+      summary: "Updated user"
+      description: "This can only be done by the logged in user."
+      operationId: "updateUser"
+      produces:
+        - "application/json"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "5dde41fd7ac7e72f14479b69"
+          required: true
+          type: "string"
+        - name: "firstName"
+          in: "formData"
+          description: "add name of the User"
+          required: false
+          type: "string"
+        - name: "lastName"
+          in: "formData"
+          description: "add name of the User"
+          required: false
+          type: "string"
+        - name: "email"
+          in: "formData"
+          description: "add email of the User"
+          required: false
+          type: "string"
+        - name: "phone"
+          in: formData
+          description: "add email of the User"
+          required: false
+          type: "string"
+        - name: "password"
+          in: "formData"
+          description: "add password of the User"
+          required: false
+          type: "string"
+      responses:
+        400:
+          description: "Invalid user supplied"
+        404:
+          description: "User not found"
+    delete:
+      tags:
+        - "user"
+      summary: "Deletes a User"
+      description: ""
+      operationId: "deleteUser"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "delete - user - id"
+          required: true
+          type: "string"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "User not found"
+definitions:
+  User:
+    type: "object"
+    required:
+    properties:
+      lastName:
+      firstName:
+      email:
+      password:
+  Item:
+    type: "object"
+    required:
+    properties:
+      nameGroup:
+      descriptionGroup:
+      nameItem:
+      descriptionItem:
+      costItem:
+      countItems:
+      dateAddItem:
+      statusItems:
+
