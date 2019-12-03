@@ -106,6 +106,27 @@ paths:
       tags:
         - "item"
       summary: Returns all item.
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: query
+          name: name
+        - in: query
+          name: nameTop
+        - in: query
+          name: category
+        - in: query
+          name: subCategory
+        - in: query
+          name: statusItems
+        - in: query
+          name: reviews.name
+        - in: query
+          name: _id
+        - in: query
+          name: reviews.stars
       responses:
         200:
           description: OK
@@ -142,15 +163,16 @@ paths:
       description: ""
       operationId: "updatePetWithForm"
       consumes:
-        - "application/x-www-form-urlencoded"
+        - "application/json"
       produces:
         - "application/json"
       parameters:
-        - name: "nameItem"
-          in: "formData"
-          description: "add name of the Item"
-          required: false
-          type: "string"
+      - in: "body"
+        name: "body"
+        description: "Item object add"
+        required: true
+        schema:
+          $ref: "#/definitions/Item"
       responses:
         405:
           description: "Invalid input"
@@ -383,14 +405,31 @@ definitions:
       password:
   Item:
     type: "object"
-    required:
     properties:
-      nameGroup:
-      descriptionGroup:
-      nameItem:
-      descriptionItem:
-      costItem:
-      countItems:
-      dateAddItem:
-      statusItems:
+      category:
+        type: "string"
+      subCategory:
+        type: "string"
+      nameTop:
+        type: "string"
+      name:
+        type: "string"
+      reviews:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            name:
+              type: "string"
+            stars:
+              type: "string"
+            text:
+              type: "string"
+
+
+
+
+
+
+
 

@@ -1,16 +1,11 @@
 const {validateData} = require('../helpers/dataValidator');
 const { Item } = require('../models/Item');
 const {updateEntity} = require('../helpers/entityUpdater');
+
 exports.getItemList = async (req, res) =>{
-  const sortBy = req.query.sort ? req.query.sort : 'date';
-  let itemList = null;
-  if(req.query.done == 'true'){
-    itemList =  await Item.find({done: true}).sort({[sortBy]: -1});
-  }else if(req.query.status == 'false'){
-    itemList =  await Item.find({done: false}).sort({[sortBy]: -1});
-  }else{
-    itemList =  await Item.find().sort({[sortBy]: -1});
-  }
+const filter = req.query? req.query: ''
+  const itemList =  await Item.find(filter);
+  itemList.length!==0? res.status(200).json(itemList): res.status(200).json({query:filter});
   if(!itemList){
     const err = new Error('Виникла помилка при виконанні запиту!');
     err.status = 500;
@@ -31,14 +26,11 @@ exports.getSingleItem = async (req, res) =>{
 }
 
 exports.addItem = async (req, res)=>{
-
   await validateData(req);
   const newItemData = req.body;
-  console.log(newItemData);
-
+  // console.log(newItemData);
   const newItem = new Item(newItemData);
   const createdItem = await newItem.save();
-
   res.status(200).json(createdItem);
 }
 
