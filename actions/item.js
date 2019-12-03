@@ -31,8 +31,11 @@ exports.getSingleItem = async (req, res) =>{
 }
 
 exports.addItem = async (req, res)=>{
+
   await validateData(req);
   const newItemData = req.body;
+  console.log(newItemData);
+
   const newItem = new Item(newItemData);
   const createdItem = await newItem.save();
 
