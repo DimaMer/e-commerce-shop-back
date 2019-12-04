@@ -11,7 +11,7 @@ const ItemSchema = new Schema({
   stars: { type: String },
   dateAddItem: { type: Date, required: true, default: Date.now},
   statusItems: { type: Boolean, required: true, default: false },
-  reviews: [{ name: {type: String}, stars: {type: String}, text: {type: String}, date: {type: Date, required: true, default: Date.now}, status: {type: Boolean, required: true, default: false}}],
+  // reviews: [{ name: {type: String}, stars: {type: String}, text: {type: String}, date: {type: Date, required: true, default: Date.now}, status: {type: Boolean, required: true, default: false}}],
   // video: [{ type: String }],
   // photoMain: [{ name: {type: String}}],
   // photoSecond: [{ name: {type: String}}],

@@ -3,8 +3,8 @@ info:
   title: Ecomerse Api
   description: API.
   version: 1.0.0
-#host: localhost:7000
-host: e-commerce-shop-back.herokuapp.com
+host: localhost:7000
+#host: e-commerce-shop-back.herokuapp.com
 basePath: /api
 schemes:
   - http
@@ -218,6 +218,115 @@ paths:
           description: "Invalid ID supplied"
         404:
           description: "Item not found"
+  /reviewitem:
+    get:
+      tags:
+        - "reviewitem"
+      summary: Returns all reviewItem.
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: query
+          name: idItem
+        - in: query
+          name: name
+        - in: query
+          name: stars
+        - in: query
+          name: text
+        - in: query
+          name: _id
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#'
+  /reviewitem/single:
+    get:
+      tags:
+        - "reviewitem"
+      summary: "Find single reviewItem"
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "finditemByData"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "reviewItemId"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#"
+        400:
+          description: "Invalid status value"
+    post:
+      tags:
+        - "reviewitem"
+      summary: "Add reviewItem in the store with form data"
+      description: ""
+      operationId: "updatePetWithForm"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "reviewItem object add"
+          required: true
+          schema:
+            $ref: "#/definitions/ReviewItem"
+      responses:
+        405:
+          description: "Invalid input"
+    put:
+      tags:
+        - "reviewitem"
+      summary: "Updated reviewItem"
+      description: "This can only be done by the logged in reviewItem."
+      operationId: "updateReviewItem"
+      produces:
+        - "application/json"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "reviewItemId"
+          required: true
+          type: "string"
+      responses:
+        400:
+          description: "Invalid reviewItem supplied"
+        404:
+          description: "reviewItem not found"
+    delete:
+      tags:
+        - "reviewitem"
+      summary: "Deletes a reviewItem"
+      description: ""
+      operationId: "delete reviewItem"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "delete - reviewItem - id"
+          required: true
+          type: "string"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "reviewItem not found"
   /user/login:
     post:
       tags:
@@ -418,15 +527,28 @@ definitions:
         type: "string"
       reviews:
         type: "array"
-        items:
-          type: "object"
-          properties:
-            name:
-              type: "string"
-            stars:
-              type: "string"
-            text:
-              type: "string"
+  ReviewItem:
+    type: "object"
+    properties:
+      idItem:
+        type: "string"
+      name:
+        type: "string"
+      stars:
+        type: "string"
+      text:
+        type: "string"
+#      reviews:
+#        type: "array"
+#        items:
+#          type: "object"
+#          properties:
+#            name:
+#              type: "string"
+#            stars:
+#              type: "string"
+#            text:
+#              type: "string"
 
 
 
