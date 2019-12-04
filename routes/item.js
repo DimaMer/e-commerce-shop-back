@@ -24,9 +24,7 @@ router.route('/item/single')
          catchErrors(addItem) )
   .put(checkIfAuthenticated,  uploadNone,
         [check('id').isMongoId(),
-         check('email').if(check('email').exists()).isEmail(),
-         check('phone').if(check('phone').exists()).isInt().isLength({ min: 6 })],
-        catchErrors(editItem) )
+         ], catchErrors(editItem) )
   .delete(checkIfAuthenticated, [check('id').isMongoId()],
           catchErrors(deleteItem));
 

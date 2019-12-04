@@ -6,14 +6,14 @@ const {updateEntity} = require('../helpers/entityUpdater');
 exports.getReviewItemList = async (req, res) =>{
     const filter = req.query? req.query: ''
     const itemList =  await ReviewItem.find(filter);
-    itemList.length!==0? res.status(200).json(itemList): res.status(200).json({query:filter});
+    itemList.length!==0? res.status(200).json(itemList): res.status(404).json({query:filter});
 
   if(!itemList){
       const err = new Error('Виникла помилка при виконанні запиту!');
       err.status = 500;
       throw err;
     }
-    res.status(200).json(itemList);
+    // res.status(200).json(itemList);
   }
 
 exports.getSingleReviewItem = async (req, res) =>{

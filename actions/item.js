@@ -5,13 +5,13 @@ const {updateEntity} = require('../helpers/entityUpdater');
 exports.getItemList = async (req, res) =>{
 const filter = req.query? req.query: ''
   const itemList =  await Item.find(filter);
-  itemList.length!==0? res.status(200).json(itemList): res.status(200).json({query:filter});
+  itemList.length!==0? res.status(200).json(itemList): res.status(404).json({query:filter});
   if(!itemList){
     const err = new Error('Виникла помилка при виконанні запиту!');
     err.status = 500;
     throw err;
   }
-  res.status(200).json(itemList);
+
 }
 
 exports.getSingleItem = async (req, res) =>{
@@ -36,8 +36,11 @@ exports.addItem = async (req, res)=>{
 
 exports.editItem = async (req, res) => {
   await validateData(req);
+
   const id = req.query.id;
+
   const updatedItem = await updateEntity(id, req, Item);
+  console.log(1111, id, req.body );
   if(!updatedItem){
     const error = new Error('Помилка при виконанні оновлення!');
     error.status = 500;

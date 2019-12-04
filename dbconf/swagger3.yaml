@@ -3,8 +3,8 @@ info:
   title: Ecomerse Api
   description: API.
   version: 1.0.0
-#host: localhost:7000
-host: e-commerce-shop-back.herokuapp.com
+host: localhost:7000
+#host: e-commerce-shop-back.herokuapp.com
 basePath: /api
 schemes:
   - http
@@ -187,13 +187,19 @@ paths:
       produces:
         - "application/json"
       consumes:
-        - "application/x-www-form-urlencoded"
+        - "application/json"
       parameters:
         - name: "id"
           in: "query"
           description: "itemId"
           required: true
           type: "string"
+        - in: "body"
+          name: "body"
+          description: "Item object put"
+          required: true
+          schema:
+            $ref: "#/definitions/Item"
       responses:
         400:
           description: "Invalid item supplied"
@@ -296,13 +302,19 @@ paths:
       produces:
         - "application/json"
       consumes:
-        - "application/x-www-form-urlencoded"
+        - "application/json"
       parameters:
         - name: "id"
           in: "query"
           description: "reviewItemId"
           required: true
           type: "string"
+        - in: "body"
+          name: "body"
+          description: "reviewItem object put"
+          required: true
+          schema:
+            $ref: "#/definitions/ReviewItem"
       responses:
         400:
           description: "Invalid reviewItem supplied"
@@ -511,9 +523,13 @@ definitions:
     required:
     properties:
       lastName:
+        type: "string"
       firstName:
+        type: "string"
       email:
+        type: "string"
       password:
+        type: "string"
   Item:
     type: "object"
     properties:
@@ -525,6 +541,11 @@ definitions:
         type: "string"
       name:
         type: "string"
+      dateAddItem:
+        type: string
+        format: date
+      statusItems:
+        type: "boolean"
   ReviewItem:
     type: "object"
     properties:
