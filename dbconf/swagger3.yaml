@@ -525,8 +525,6 @@ definitions:
         type: "string"
       name:
         type: "string"
-      reviews:
-        type: "array"
   ReviewItem:
     type: "object"
     properties:
