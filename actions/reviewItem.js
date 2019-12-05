@@ -30,10 +30,11 @@ exports.getSingleReviewItem = async (req, res) =>{
 exports.addReviewItem = async (req, res)=>{
   await validateData(req);
   const newReviewItemData = req.body;
+
  if (await Item.findById(newReviewItemData.idItem)) {
-  console.log(newReviewItemData);
   const newReviewItem = await new ReviewItem(newReviewItemData);
   const createdReviewItem = await newReviewItem.save();
+  await Item.findByIdAndUpdate(newReviewItemData.idItem, {$push: {reviews: createdReviewItem.id}}, {new: true});
   res.status(200).json(createdReviewItem);}
  else {
        res.status(404).json({error:"Товар з таким id не знайдено!"});

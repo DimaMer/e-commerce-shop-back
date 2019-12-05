@@ -114,21 +114,19 @@ paths:
         - "application/json"
       parameters:
         - in: query
-          name: name
-        - in: query
-          name: nameTop
+          name: _id
         - in: query
           name: category
         - in: query
           name: subCategory
         - in: query
+          name: nameTop
+        - in: query
+          name: name
+        - in: query
           name: statusItems
         - in: query
-          name: reviews.name
-        - in: query
-          name: _id
-        - in: query
-          name: reviews.stars
+          name: reviews
       responses:
         200:
           description: OK
@@ -235,6 +233,8 @@ paths:
         - "application/json"
       parameters:
         - in: query
+          name: _id
+        - in: query
           name: idItem
         - in: query
           name: name
@@ -242,8 +242,6 @@ paths:
           name: stars
         - in: query
           name: text
-        - in: query
-          name: _id
       responses:
         200:
           description: OK

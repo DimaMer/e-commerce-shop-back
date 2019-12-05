@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
-
+const {Item} = require('./Item');
 const ReviewItemSchema = new Schema({
-    idItem:{type: Schema.Types.ObjectId, required: true, default: '5de7b55ee1609f023035e219'},
+    idItem:{ type: Schema.Types.ObjectId, ref: 'Item' },
     name: {type: String,required: true},
     stars: {type: String},
     text: {type: String},

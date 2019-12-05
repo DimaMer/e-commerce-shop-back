@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
-
+const {ReviewItem} = require('./ReviewItem');
 const ItemSchema = new Schema({
   nameTop: { type: String },
   name: { type: String, required: true },
@@ -11,9 +11,9 @@ const ItemSchema = new Schema({
   stars: { type: String },
   dateAddItem: { type: Date, required: true, default: Date.now},
   statusItems: { type: Boolean, required: true, default: false },
-
-  // reviews: [{ name: {type: String}, stars: {type: String}, text: {type: String}, date: {type: Date, required: true, default: Date.now}, status: {type: Boolean, required: true, default: false}}],
-
+  reviews: [{ type: Schema.Types.ObjectId, ref: 'ReviewItem' }],
+  photo: [{url:{ type: String }, category:{ type: String }, idPhoto:{ type: Schema.Types.ObjectId}}]
+// photo {url, id item, idphot, descr: main,  cli, other }
   // video: [{ type: String }],
   // photoMain: [{ name: {type: String}}],
   // photoSecond: [{ name: {type: String}}],

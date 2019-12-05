@@ -1,11 +1,16 @@
 const {validateData} = require('../helpers/dataValidator');
 const { Item } = require('../models/Item');
 const {updateEntity} = require('../helpers/entityUpdater');
-
+const { ReviewItem } = require('../models/ReviewItem');
 exports.getItemList = async (req, res) =>{
 const filter = req.query? req.query: ''
-  const itemList =  await Item.find(filter);
+  // const itemList =  await Item.find(filter);
+  const itemList = await Item.
+  find(filter).
+  populate('reviews')
+
   itemList.length!==0? res.status(200).json(itemList): res.status(404).json({query:filter});
+
   if(!itemList){
     const err = new Error('Виникла помилка при виконанні запиту!');
     err.status = 500;
@@ -28,7 +33,6 @@ exports.getSingleItem = async (req, res) =>{
 exports.addItem = async (req, res)=>{
   await validateData(req);
   const newItemData = req.body;
-  // console.log(newItemData);
   const newItem = new Item(newItemData);
   const createdItem = await newItem.save();
   res.status(200).json(createdItem);
@@ -36,11 +40,8 @@ exports.addItem = async (req, res)=>{
 
 exports.editItem = async (req, res) => {
   await validateData(req);
-
   const id = req.query.id;
-
   const updatedItem = await updateEntity(id, req, Item);
-  console.log(1111, id, req.body );
   if(!updatedItem){
     const error = new Error('Помилка при виконанні оновлення!');
     error.status = 500;
@@ -51,6 +52,7 @@ exports.editItem = async (req, res) => {
 
 exports.deleteItem = async (req, res) => {
   await validateData(req);
+  await ReviewItem.deleteMany({idItem: req.query.id});
   const deletedItem = await Item.findByIdAndDelete(req.query.id);
   res.status(200).json(deletedItem);
 }
