@@ -2,12 +2,17 @@ const {validateData} = require('../helpers/dataValidator');
 const { Item } = require('../models/Item');
 const {updateEntity} = require('../helpers/entityUpdater');
 const { ReviewItem } = require('../models/ReviewItem');
+const { Gallery } = require('../models/Gallery');
+
+
 exports.getItemList = async (req, res) =>{
-const filter = req.query? req.query: ''
+const {page, limit, ...filter} = req.query? req.query: ''
+
   // const itemList =  await Item.find(filter);
-  const itemList = await Item.
-  find(filter).
-  populate('reviews')
+  const itemList = await Item.paginate(Item.find(filter).
+      populate('reviews').
+      populate('photo'), { page: parseInt(page)||1, limit: parseInt(  limit)||100 })
+
 
   itemList.length!==0? res.status(200).json(itemList): res.status(404).json({query:filter});
 
@@ -53,6 +58,7 @@ exports.editItem = async (req, res) => {
 exports.deleteItem = async (req, res) => {
   await validateData(req);
   await ReviewItem.deleteMany({idItem: req.query.id});
+  await Gallery.deleteMany({idItem: req.query.id});
   const deletedItem = await Item.findByIdAndDelete(req.query.id);
   res.status(200).json(deletedItem);
 }

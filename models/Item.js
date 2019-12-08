@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
-const {ReviewItem} = require('./ReviewItem');
+// const {ReviewItem} = require('./ReviewItem');
+const mongoosePaginate = require('mongoose-paginate');
+
+
 const ItemSchema = new Schema({
   nameTop: { type: String },
   name: { type: String, required: true },
@@ -12,7 +15,8 @@ const ItemSchema = new Schema({
   dateAddItem: { type: Date, required: true, default: Date.now},
   statusItems: { type: Boolean, required: true, default: false },
   reviews: [{ type: Schema.Types.ObjectId, ref: 'ReviewItem' }],
-  photo: [{url:{ type: String }, category:{ type: String }, idPhoto:{ type: Schema.Types.ObjectId}}]
+  photo: [{ type: Schema.Types.ObjectId, ref: 'Gallery' }],
+  // photo: [{url:{ type: String }, category:{ type: String }, idPhoto:{ type: Schema.Types.ObjectId}}]
 // photo {url, id item, idphot, descr: main,  cli, other }
   // video: [{ type: String }],
   // photoMain: [{ name: {type: String}}],
@@ -21,7 +25,7 @@ const ItemSchema = new Schema({
   // photoOther: [{ name: {type: String}}],
   // photoCharacteristics: [{ name: {type: String},  name: {type: String}}],
 });
-
+ItemSchema.plugin(mongoosePaginate);
 const Item = mongoose.model('Item', ItemSchema);
 
 exports.Item = Item;

@@ -7,14 +7,27 @@ info:
 host: e-commerce-shop-back.herokuapp.com
 basePath: /api
 schemes:
-  - http
   - https
+  - http
 paths:
   /gallery:
     get:
       tags:
         - "gallery"
       summary: Returns all gallery.
+      parameters:
+        - name: "_id"
+          in: "query"
+          description: "gallery _Id"
+          type: "string"
+        - name: "idItem"
+          in: "query"
+          description: "gallery IdItem"
+          type: "string"
+        - name: "category"
+          in: "query"
+          description: "gallery category"
+          type: "string"
       responses:
         200:
           description: OK
@@ -53,13 +66,23 @@ paths:
       consumes:
         - form-data
       produces:
-        - "application/json"
+        - "form-data"
       parameters:
-        - name: "photo"
-          in: "formData"
-          description: "add photo of the gallery"
+        - in: formData
+          name: idItem
+          type: string
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: category
+          type: string
           required: false
+          description: Description of file contents.
+        - in: formData
+          name: photo
           type: file
+          required: true
+          description: The file to upload.
       responses:
         405:
           description: "Invalid input"
@@ -113,6 +136,10 @@ paths:
       produces:
         - "application/json"
       parameters:
+        - in: query
+          name: limit
+        - in: query
+          name: page
         - in: query
           name: _id
         - in: query
