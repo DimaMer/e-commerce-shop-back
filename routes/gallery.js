@@ -6,7 +6,7 @@ const {addGallery,
        editGallery,
        deleteGallery} = require('../controllers/gallery');
 const {catchErrors} = require('../errors/errorHandler');
-const { upload } = require('../helpers/multer');
+const { upload, cloud } = require('../helpers/multer');
 const {checkIfAuthenticated} = require('../helpers/authCheck');
 const router = express.Router();
 
@@ -15,8 +15,8 @@ router.route('/gallery')
 router.route('/gallery/single')
     .get( [check('id').isMongoId()],
         catchErrors(getSingleGallery) )
-    .post(  upload, catchErrors(addGallery) )
-    .put(  upload,
+    .post(  upload, cloud, catchErrors(addGallery) )
+    .put(  upload, cloud,
         [check('id').isMongoId()],
         catchErrors(editGallery) )
     .delete( [check('id').isMongoId()],

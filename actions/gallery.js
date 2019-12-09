@@ -37,10 +37,13 @@ exports.addGallery = async (req, res)=> {
   }
 
   const newGalleryItemData = req.body;
+
   if (await Item.findById(newGalleryItemData.idItem)) {
+
   const photoFile = req.files.photo;
 
-  const photo = photoFile[0].path;
+
+    const photo = photoFile[0].path||photoFile;
        newGalleryItemData.photo = photo;
 
   const newGallery = await new Gallery(newGalleryItemData);
