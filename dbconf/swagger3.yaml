@@ -35,6 +35,7 @@ paths:
             $ref: '#'
   /gallery/single:
     get:
+      deprecated: true
       tags:
         - "gallery"
       summary: "Find single gallery"
@@ -165,6 +166,7 @@ paths:
             $ref: '#'
   /item/single:
     get:
+      deprecated: true
       tags:
         - "item"
       summary: "Find single item"
@@ -280,6 +282,7 @@ paths:
             $ref: '#'
   /reviewitem/single:
     get:
+      deprecated: true
       tags:
         - "reviewitem"
       summary: "Find single reviewItem"
