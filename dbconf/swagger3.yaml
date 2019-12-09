@@ -566,9 +566,9 @@ definitions:
         type: "string"
       subCategory:
         type: "string"
-      nameTop:
+      title:
         type: "string"
-      name:
+      titleLong:
         type: "string"
       dateAddItem:
         type: string
