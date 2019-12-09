@@ -137,6 +137,8 @@ paths:
         - "application/json"
       parameters:
         - in: query
+          name: sort
+        - in: query
           name: limit
         - in: query
           name: page
@@ -147,13 +149,15 @@ paths:
         - in: query
           name: subCategory
         - in: query
-          name: nameTop
+          name: title
         - in: query
-          name: name
+          name: titleLong
+        - in: query
+          name: price
+        - in: query
+          name: discount
         - in: query
           name: statusItems
-        - in: query
-          name: reviews
       responses:
         200:
           description: OK

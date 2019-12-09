@@ -1,18 +1,17 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
-// const {ReviewItem} = require('./ReviewItem');
 const mongoosePaginate = require('mongoose-paginate');
 
 
 const ItemSchema = new Schema({
-  nameTop: { type: String },
-  name: { type: String, required: true },
+  title: { type: String },
+  titleLong: { type: String, required: true },
   category: { type: String, default: 'unCategory' },
   subCategory: { type: String, default: 'unSubCategory' },
   price: { type: String },
   discount: { type: String },
   stars: { type: String },
-  dateAddItem: { type: Date, required: true, default: Date.now},
+  dateCreateItem: { type: Date, required: true, default: Date.now},
   statusItems: { type: Boolean, required: true, default: false },
   reviews: [{ type: Schema.Types.ObjectId, ref: 'ReviewItem' }],
   photo: [{ type: Schema.Types.ObjectId, ref: 'Gallery' }],

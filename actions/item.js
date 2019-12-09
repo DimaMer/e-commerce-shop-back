@@ -6,12 +6,20 @@ const { Gallery } = require('../models/Gallery');
 
 
 exports.getItemList = async (req, res) =>{
-const {page, limit, ...filter} = req.query? req.query: ''
+const {page=1, limit=100,sort='_id', ...filter} = req.query? req.query: ''
 
   // const itemList =  await Item.find(filter);
-  const itemList = await Item.paginate(Item.find(filter).
-      populate('reviews').
-      populate('photo'), { page: parseInt(page)||1, limit: parseInt(  limit)||100 })
+  let itemList;
+  if (filter._id)  itemList = await Item.paginate(
+      Item.find(filter).populate('photo').populate('reviews').sort(sort),
+      { page: parseInt(page)||1, limit: parseInt(limit)||100 }
+      )
+  else
+     itemList = await Item.paginate(
+        Item.find(filter).sort(sort),
+        { page: parseInt(page)||1, limit: parseInt(limit)||100 }
+    )
+
 
 
   itemList.length!==0? res.status(200).json(itemList): res.status(404).json({query:filter});

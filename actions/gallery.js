@@ -52,7 +52,7 @@ exports.addGallery = async (req, res)=> {
   }
 
     const createdGallery = await newGallery.save();
-    await Item.findByIdAndUpdate(newGalleryItemData.idItem, {$push: {photo: createdGallery.id}}, {new: true});
+    // await Item.findByIdAndUpdate(newGalleryItemData.idItem, {$push: {photo: createdGallery.id}}, {new: true});
     res.status(200).json(createdGallery);
 }
   else res.status(200).json('kxm');
