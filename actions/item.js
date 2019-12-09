@@ -11,7 +11,7 @@ const {page=1, limit=100,sort='_id', ...filter} = req.query? req.query: ''
   // const itemList =  await Item.find(filter);
   let itemList;
   if (filter._id)  itemList = await Item.paginate(
-      Item.find(filter).populate('photo').populate('reviews').sort(sort),
+      Item.find(filter).populate('photos').populate('reviews').sort(sort),
       { page: parseInt(page)||1, limit: parseInt(limit)||100 }
       )
   else

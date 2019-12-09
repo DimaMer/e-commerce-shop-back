@@ -13,7 +13,7 @@ const GallerySchema = new Schema({
 
 GallerySchema.post(
     'save', async function(doc) {
-        const a= await Item.findByIdAndUpdate(doc.idItem, {$push: {photo: doc.id}}, {new: true});
+        const a= await Item.findByIdAndUpdate(doc.idItem, {$push: {photos: doc.id}}, {new: true});
   console.log('%s has been saved', a);
 });
 

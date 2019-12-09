@@ -14,7 +14,7 @@ const ItemSchema = new Schema({
   dateCreateItem: { type: Date, required: true, default: Date.now},
   statusItems: { type: Boolean, required: true, default: false },
   reviews: [{ type: Schema.Types.ObjectId, ref: 'ReviewItem' }],
-  photo: [{ type: Schema.Types.ObjectId, ref: 'Gallery' }],
+  photos: [{ type: Schema.Types.ObjectId, ref: 'Gallery' }],
   // photo: [{url:{ type: String }, category:{ type: String }, idPhoto:{ type: Schema.Types.ObjectId}}]
 // photo {url, id item, idphot, descr: main,  cli, other }
   // video: [{ type: String }],
