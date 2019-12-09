@@ -570,6 +570,10 @@ definitions:
         type: "string"
       titleLong:
         type: "string"
+      price:
+        type: "string"
+      discount:
+        type: "string"
       dateAddItem:
         type: string
         format: date
