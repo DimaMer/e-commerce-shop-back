@@ -6,8 +6,8 @@ const mongoosePaginate = require('mongoose-paginate');
 const ItemSchema = new Schema({
   title: { type: String },
   titleLong: { type: String, required: true },
-  category: { type: String, default: 'unCategory' },
-  subCategory: { type: String, default: 'unSubCategory' },
+  category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
+  subCategory: { type: Schema.Types.ObjectId, ref: 'SubCategory', required: true },
   price: { type: String },
   discount: { type: String },
   stars: { type: String },

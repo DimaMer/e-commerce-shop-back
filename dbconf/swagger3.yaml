@@ -202,7 +202,10 @@ paths:
       parameters:
       - in: "body"
         name: "body"
-        description: "Item object add"
+        description: "Item object add (category	string
+                                       required: true
+                                       subCategory	string
+                                       required: true)"
         required: true
         schema:
           $ref: "#/definitions/Item"
@@ -541,6 +544,11 @@ paths:
       produces:
         - "application/json"
       parameters:
+        - name: "_id"
+          in: "query"
+          description: "category Id"
+          required: true
+          type: "string"
         - in: "body"
           name: "body"
           description: "subCategory object add"
@@ -799,8 +807,10 @@ definitions:
     properties:
       category:
         type: "string"
+        required: true
       subCategory:
         type: "string"
+        required: true
       title:
         type: "string"
       titleLong:

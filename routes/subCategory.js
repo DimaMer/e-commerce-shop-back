@@ -18,7 +18,7 @@ router.route('/subCategory/single')
          check('subCatId').isMongoId()],
         catchErrors(getSingleSubCategory) )
   .post(checkIfAuthenticated,  uploadNone,
-         [check('catId').isMongoId(),
+         [check('_id').isMongoId(),
          check('name').not().isEmpty()],
          catchErrors(addSubCategory) )
   .put(checkIfAuthenticated,  uploadNone,

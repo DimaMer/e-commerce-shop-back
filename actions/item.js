@@ -3,7 +3,8 @@ const { Item } = require('../models/Item');
 const {updateEntity} = require('../helpers/entityUpdater');
 const { ReviewItem } = require('../models/ReviewItem');
 const { Gallery } = require('../models/Gallery');
-
+const { Category } = require('../models/Category');
+const { SubCategory } = require('../models/SubCategory');
 
 exports.getItemList = async (req, res) =>{
 const {page=1, limit=100,sort='_id', ...filter} = req.query? req.query: ''
@@ -46,9 +47,13 @@ exports.getSingleItem = async (req, res) =>{
 exports.addItem = async (req, res)=>{
   await validateData(req);
   const newItemData = req.body;
-  const newItem = new Item(newItemData);
-  const createdItem = await newItem.save();
-  res.status(200).json(createdItem);
+  const foundedCategory = await Category.findById(newItemData.category);
+  const subCategory = await foundedCategory.subCategorys.id(newItemData.subCategory);
+  if (foundedCategory && subCategory) {
+    const newItem = new Item(req.body);
+    const createdItem = await newItem.save();
+    res.status(200).json(createdItem);
+  } else res.status(500).json('errorrr');
 }
 
 exports.editItem = async (req, res) => {

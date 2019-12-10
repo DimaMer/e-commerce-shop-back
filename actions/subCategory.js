@@ -22,7 +22,7 @@ exports.getSingleSubCategory = async (req, res) =>{
 
 exports.addSubCategory = async (req, res)=>{
   await validateData(req);
-  const id = req.body.catId;
+  const id = req.query._id;
   console.log(111,id);
   const SubCategoryData = new SubCategory(req.body);
   if(!SubCategoryData){
