@@ -371,6 +371,238 @@ paths:
           description: "Invalid ID supplied"
         404:
           description: "reviewItem not found"
+
+  /category:
+    get:
+      tags:
+        - "category"
+      summary: Returns all category.
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: query
+          name: _id
+        - in: query
+          name: catId
+        - in: query
+          name: name
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#'
+  /category/single:
+    get:
+      deprecated: true
+      tags:
+        - "category"
+      summary: "Find single category"
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "finditemByData"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "categoryId"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#"
+        400:
+          description: "Invalid status value"
+    post:
+      tags:
+        - "category"
+      summary: "Add category in the store with form data"
+      description: ""
+      operationId: "updatePetWithForm"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "category object add"
+          required: true
+          schema:
+            $ref: "#/definitions/category"
+      responses:
+        405:
+          description: "Invalid input"
+    put:
+      tags:
+        - "category"
+      summary: "Updated category"
+      description: "This can only be done by the logged in category."
+      operationId: "updatecategory"
+      produces:
+        - "application/json"
+      consumes:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "category"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
+          description: "category object put"
+          required: true
+          schema:
+            $ref: "#/definitions/category"
+      responses:
+        400:
+          description: "Invalid category supplied"
+        404:
+          description: "category not found"
+    delete:
+      tags:
+        - "category"
+      summary: "Deletes a category"
+      description: ""
+      operationId: "delete category"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "delete - category - id"
+          required: true
+          type: "string"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "category not found"
+  /subCategory:
+    get:
+      tags:
+        - "subCategory"
+      summary: Returns all category.
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: query
+          name: _id
+        - in: query
+          name: catId
+        - in: query
+          name: name
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#'
+  /subCategory/single:
+    get:
+      deprecated: true
+      tags:
+        - "subCategory"
+      summary: "Find single subCategory"
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "findsubCategoryByData"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "subCategoryId"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#"
+        400:
+          description: "Invalid status value"
+    post:
+      tags:
+        - "subCategory"
+      summary: "Add subCategory in the store with form data"
+      description: ""
+      operationId: "updatePetWithForm"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "subCategory object add"
+          required: true
+          schema:
+            $ref: "#/definitions/subCategory"
+      responses:
+        405:
+          description: "Invalid input"
+    put:
+      tags:
+        - "subCategory"
+      summary: "Updated subCategory"
+      description: "This can only be done by the logged in subCategory."
+      operationId: "updatesubCategory"
+      produces:
+        - "application/json"
+      consumes:
+        - "application/json"
+      parameters:
+        - name: "catId"
+          in: "query"
+          description: "category"
+          required: true
+          type: "string"
+        - name: "_id"
+          in: "query"
+          description: "Sub category _id"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
+          description: "subCategory object put"
+          required: true
+          schema:
+            $ref: "#/definitions/subCategory"
+      responses:
+        400:
+          description: "Invalid category supplied"
+        404:
+          description: "subCategory not found"
+    delete:
+      tags:
+        - "subCategory"
+      summary: "Deletes a subCategory"
+      description: ""
+      operationId: "delete subCategory"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "catId"
+          in: "query"
+        - name: "subCatId"
+          in: "query"
+          description: "delete - subCategory - id"
+          required: true
+          type: "string"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "subCategory not found"
   /user/login:
     post:
       tags:
@@ -592,6 +824,20 @@ definitions:
       stars:
         type: "string"
       text:
+        type: "string"
+  category:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      catId:
+        type: "string"
+  subCategory:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      subCatId:
         type: "string"
 #      reviews:
 #        type: "array"

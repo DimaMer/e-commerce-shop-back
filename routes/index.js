@@ -1,5 +1,7 @@
 const express    = require('express');
 const user      = require('./user');
+const category    = require('./category');
+const subCategory = require('./subCategory');
 const item      = require('./item');
 const gallery      = require('./gallery');
 const reviewItem      = require('./reviewItem');
@@ -9,6 +11,8 @@ app.use('/api', user);
 app.use('/api', item);
 app.use('/api', gallery);
 app.use('/api', reviewItem);
+app.use('/api', category);
+app.use('/api', subCategory);
 app.use('/', (req, res) =>{
   res.send("starts...")
 });
