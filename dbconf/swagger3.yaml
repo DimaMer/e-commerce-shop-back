@@ -387,10 +387,6 @@ paths:
       parameters:
         - in: query
           name: _id
-        - in: query
-          name: catId
-        - in: query
-          name: name
       responses:
         200:
           description: OK
@@ -522,6 +518,11 @@ paths:
         - name: "id"
           in: "query"
           description: "subCategoryId"
+          required: true
+          type: "string"
+        - name: "catId"
+          in: "query"
+          description: "CategoryId"
           required: true
           type: "string"
       responses:

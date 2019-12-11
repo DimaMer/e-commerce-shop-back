@@ -15,15 +15,18 @@ exports.getSubCategoryList = async (req, res) =>{
 
 exports.getSingleSubCategory = async (req, res) =>{
   await validateData(req);
+  console.log(req.query.catId, req.query.id);
   const foundedCategory = await Category.findById(req.query.catId);
-  const subCategory = await foundedCategory.subCategorys.id(req.query.subCatId);
+  console.log(111,foundedCategory);
+  const subCategory = await foundedCategory.subCategorys.id(req.query.id);
+
   res.status(200).json(subCategory);
 }
 
 exports.addSubCategory = async (req, res)=>{
   await validateData(req);
   const id = req.query._id;
-  console.log(111,id);
+  // console.log(111,id);
   const SubCategoryData = new SubCategory(req.body);
   if(!SubCategoryData){
     const err = new Error('Нову під категорії  не створено!');
