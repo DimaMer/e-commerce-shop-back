@@ -506,7 +506,6 @@ paths:
             $ref: '#'
   /subCategory/single:
     get:
-      deprecated: true
       tags:
         - "subCategory"
       summary: "Find single subCategory"
