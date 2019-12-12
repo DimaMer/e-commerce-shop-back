@@ -1,5 +1,21 @@
 const multer = require('multer');
+const cloudinary  = require('cloudinary')
+cloudinary.config({
+  cloud_name: 'dtmqswql7',
+  api_key: '441733751616911',
+  api_secret: 'NrPljZnLRI5HxIRTytVOwiBaQy0',
+});
+exports.cloud = (req, res, next) => {
 
+  const path = req.files.photo[0].path;
+
+  cloudinary.uploader.upload(path, function(image, err ) {
+
+    if (err)return res.send(err);
+    req.files.photo=image.url
+
+    return next();
+  })}
 /* Реалізація мультера (для завантаження картинок у сховище)
   upload - для завантаження фоографій
   uploadCv - для завантаження резюме

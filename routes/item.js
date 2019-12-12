@@ -16,15 +16,15 @@ router.route('/item/single')
   .get(  [check('id').isMongoId()],
         catchErrors(getSingleItem) )
   .post(upload,
-         // [check('firstName').not().isEmpty(),
+         // [
+      // check('firstName').not().isEmpty(),
          // check('email').if(check('email').exists()).isEmail(),
-         // check('phone').isInt().isLength({ min: 6 })],
+         // check('phone').isInt().isLength({ min: 6 })
+         //     ],
          catchErrors(addItem) )
   .put(checkIfAuthenticated,  uploadNone,
         [check('id').isMongoId(),
-         check('email').if(check('email').exists()).isEmail(),
-         check('phone').if(check('phone').exists()).isInt().isLength({ min: 6 })],
-        catchErrors(editItem) )
+         ], catchErrors(editItem) )
   .delete(checkIfAuthenticated, [check('id').isMongoId()],
           catchErrors(deleteItem));
 

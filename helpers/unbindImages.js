@@ -1,5 +1,5 @@
 const fs = require('fs');
-/* Функція для видалення непотрібних картинок (якщо зв'язана з ними сутність 
+/* Функція для видалення непотрібних картинок (якщо зв'язана з ними сутність
    видаляється) */
 exports.unbindImageByAddress = async function (imageAddress) {
   const fileExist = fs.existsSync(`public${imageAddress}`);
@@ -12,4 +12,5 @@ exports.unbindImageByAddress = async function (imageAddress) {
   }
   return;
 };
+
 
