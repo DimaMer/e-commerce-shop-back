@@ -15,6 +15,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 
+const graphqlHTTP = require('express-graphql')
+const schema = require('./dbconf/schema.js')
+app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  graphiql: true
+}))
+
+
+
+
 
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
