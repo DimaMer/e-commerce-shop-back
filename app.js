@@ -26,12 +26,6 @@ app.use('/graphql', graphqlHTTP({
 
 
 
-
-
-
-
-
-
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./dbconf/swagger3.yaml');
