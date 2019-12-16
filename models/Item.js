@@ -8,7 +8,7 @@ const ItemSchema = new Schema({
   titleLong: { type: String, required: true },
   category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
   subCategory: { type: Schema.Types.ObjectId, ref: 'SubCategory', required: true },
-  price: { type: String },
+  price: { type: Number },
   discount: { type: String },
   isPopular: {type: Boolean, default: false},
   stars: { type: String },
