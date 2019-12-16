@@ -10,6 +10,7 @@ const ItemSchema = new Schema({
   subCategory: { type: Schema.Types.ObjectId, ref: 'SubCategory', required: true },
   price: { type: String },
   discount: { type: String },
+  isPopular: {type: Boolean, default: false},
   stars: { type: String },
   dateCreateItem: { type: Date, required: true, default: Date.now},
   statusItems: { type: Boolean, required: true, default: false },

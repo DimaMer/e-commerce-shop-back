@@ -3,8 +3,8 @@ info:
   title: Ecomerse Api
   description: API.
   version: 1.0.0
-#host: localhost:7000
-host: e-commerce-shop-back.herokuapp.com
+host: localhost:7000
+#host: e-commerce-shop-back.herokuapp.com
 basePath: /api
 schemes:
   - https
@@ -157,6 +157,8 @@ paths:
           name: price
         - in: query
           name: discount
+        - in: query
+          name: isPopular
         - in: query
           name: statusItems
       responses:
@@ -824,6 +826,9 @@ definitions:
         format: date
       statusItems:
         type: "boolean"
+      isPopular:
+        type: "boolean"
+        default: false
   ReviewItem:
     type: "object"
     properties:
