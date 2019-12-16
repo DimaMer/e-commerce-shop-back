@@ -818,7 +818,7 @@ definitions:
       titleLong:
         type: "string"
       price:
-        type: "string"
+        type: integer($int64)
       discount:
         type: "string"
       dateAddItem:
