@@ -1,10 +1,11 @@
 const {validateData} = require('../helpers/dataValidator');
-const { Item } = require('../models/Item');
+const { Item, ItemSchema } = require('../models/Item');
 const {updateEntity} = require('../helpers/entityUpdater');
 const { ReviewItem } = require('../models/ReviewItem');
 const { Gallery } = require('../models/Gallery');
 const { Category } = require('../models/Category');
 const { SubCategory } = require('../models/SubCategory');
+const _ = require('lodash');
 
 exports.getItemList = async (req, res) =>{
 const {page=1, limit=100,sort='_id', ...filter} = req.query? req.query: ''
@@ -21,9 +22,15 @@ const {page=1, limit=100,sort='_id', ...filter} = req.query? req.query: ''
         { page: parseInt(page)||1, limit: parseInt(limit)||100 }
     )
 
+  const temp = await Category.find().populate('subCategory')
+  itemList.docs= _.map(itemList.docs, function(key) {
+    key.categoryName =_.find(temp, { '_id': key.category });
+    key.subCategoryName =_.find(key.categoryName.subCategorys, { '_id': key.subCategory });
+    return  {categoryName:key.categoryName.name, subCategoryName:key.subCategoryName.name, ...key._doc }
+  })
 
 
-  itemList.length!==0? res.status(200).json(itemList): res.status(404).json({query:filter});
+  itemList.length!==0?  res.status(200).json(itemList): res.status(404).json({query:filter});
 
   if(!itemList){
     const err = new Error('Виникла помилка при виконанні запиту!');

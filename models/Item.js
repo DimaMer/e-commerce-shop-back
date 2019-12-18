@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
 const mongoosePaginate = require('mongoose-paginate');
-
+const {Category} = require('../models/Category');
 
 const ItemSchema = new Schema({
   title: { type: String },
@@ -16,17 +16,39 @@ const ItemSchema = new Schema({
   statusItems: { type: Boolean, required: true, default: false },
   reviews: [{ type: Schema.Types.ObjectId, ref: 'ReviewItem' }],
   photos: [{ type: Schema.Types.ObjectId, ref: 'Gallery' }],
-  // photo: [{url:{ type: String }, category:{ type: String }, idPhoto:{ type: Schema.Types.ObjectId}}]
-// photo {url, id item, idphot, descr: main,  cli, other }
-  // video: [{ type: String }],
-  // photoMain: [{ name: {type: String}}],
-  // photoSecond: [{ name: {type: String}}],
-  // photoClient: [{ name: {type: String}}],
-  // photoOther: [{ name: {type: String}}],
-  // photoCharacteristics: [{ name: {type: String},  name: {type: String}}],
+
+
 });
+// ItemSchema.post(
+//     "find", async function(doc) {
+//       let a = await Category.findById(this.category)
+//       console.log(111,doc.map(id=>id.category));
+//       // const a= await Item.findByIdAndUpdate(doc.idItem, {$push: {photos: doc.id}}, {new: true});
+//       // console.log('%s has been saved', a);
+//     });
+// ItemSchema.virtual('cat').get(function () {
+//   console.log(1);
+//   return this.category + ' ' + this.category;
+// });
+
 ItemSchema.plugin(mongoosePaginate);
 const Item = mongoose.model('Item', ItemSchema);
 
-exports.Item = Item;
 
+
+// ItemSchema.virtual('cat').get(function () {
+//   return this.category + ' ' + this.category;
+// });
+
+
+// ItemSchema.virtual('temp', {
+//   ref: 'Category',
+//   localField: 'subCategory',
+//   foreignField: '_id',
+//   justOne: true
+// });
+
+
+
+exports.Item = Item;
+exports.ItemSchema = ItemSchema;
