@@ -8,12 +8,12 @@ const { SubCategory } = require('../models/SubCategory');
 const _ = require('lodash');
 
 exports.getItemList = async (req, res) =>{
-const {page=1, limit=100,sort='_id', sortOrder=1, ...filter} = req.query? req.query: ''
-  console.log(JSON.parse(sort));
-  // const itemList =  await Item.find(filter);
+const {page=1, limit=100,sort='{"_id":1}', ...filter} = req.query? req.query: ''
+
+  if(sort){ }
   let itemList;
   if (filter._id)  itemList = await Item.paginate(
-      Item.find(filter).populate('photos').populate('reviews').sort({ 'price': parseInt(sortOrder) }),
+      Item.find(filter).populate('photos').populate('reviews').sort( JSON.parse(sort) ),
       { page: parseInt(page)||1, limit: parseInt(limit)||100 }
       )
   else
