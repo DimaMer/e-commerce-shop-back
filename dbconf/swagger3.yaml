@@ -140,6 +140,8 @@ paths:
         - in: query
           name: sort
         - in: query
+          name: sortOrder
+        - in: query
           name: limit
         - in: query
           name: page

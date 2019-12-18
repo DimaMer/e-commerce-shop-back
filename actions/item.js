@@ -8,7 +8,7 @@ const { SubCategory } = require('../models/SubCategory');
 const _ = require('lodash');
 
 exports.getItemList = async (req, res) =>{
-const {page=1, limit=100,sort='_id', ...filter} = req.query? req.query: ''
+const {page=1, limit=100,sort='_id', sortOrder='asc', ...filter} = req.query? req.query: ''
 
   // const itemList =  await Item.find(filter);
   let itemList;
@@ -18,7 +18,7 @@ const {page=1, limit=100,sort='_id', ...filter} = req.query? req.query: ''
       )
   else
      itemList = await Item.paginate(
-        Item.find(filter).sort(sort),
+        Item.find(filter).sort( { sort: sortOrder } ),
         { page: parseInt(page)||1, limit: parseInt(limit)||100 }
     )
 
