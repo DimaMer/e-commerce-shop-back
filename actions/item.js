@@ -10,15 +10,19 @@ const _ = require('lodash');
 exports.getItemList = async (req, res) =>{
 const {page=1, limit=100,sort='{"_id":1}', ...filter} = req.query? req.query: ''
 
-  if(sort){ }
+let sortValid;
+  try {sortValid = JSON.parse(sort)}
+  catch (e) { sortValid = {"_id":1}
+  }
+
   let itemList;
   if (filter._id)  itemList = await Item.paginate(
-      Item.find(filter).populate('photos').populate('reviews').sort( JSON.parse(sort) ),
+      Item.find(filter).populate('photos').populate('reviews').sort( sortValid),
       { page: parseInt(page)||1, limit: parseInt(limit)||100 }
       )
   else
      itemList = await Item.paginate(
-        Item.find(filter).sort( JSON.parse(sort) ),
+        Item.find(filter).sort( sortValid ),
         { page: parseInt(page)||1, limit: parseInt(limit)||100 }
     )
 
