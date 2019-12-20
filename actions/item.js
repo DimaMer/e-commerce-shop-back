@@ -14,7 +14,7 @@ let sortValid;
   try {
     if (sortOrder, sortOrder==1||sortOrder==-1||sortOrder=='asc'||sortOrder=='desc') {
     sortValid = JSON.parse(`{ "${sort}": "${sortOrder}"}`)}
-    else {sortValid= JSON.parse(`{ "${sort}": "1"}`)}
+    else {sortValid= {"_id":1}}
   }
   catch (e) { sortValid = {"_id":1};
   }
