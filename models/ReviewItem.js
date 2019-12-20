@@ -25,6 +25,13 @@ ReviewItemSchema.post(
     }
 );
 
+ReviewItemSchema.post(
+    'save', async function(doc) {
+        console.log(doc.idItem);
+        const a= await Item.findByIdAndUpdate(doc.idItem, {$push: {reviews: doc.id}}, {new: true});
+        console.log('%s has been saved', a);
+    });
+
 const ReviewItem = mongoose.model('ReviewItem', ReviewItemSchema);
 
 exports.ReviewItem = ReviewItem;
