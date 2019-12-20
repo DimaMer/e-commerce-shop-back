@@ -8,11 +8,15 @@ const { SubCategory } = require('../models/SubCategory');
 const _ = require('lodash');
 
 exports.getItemList = async (req, res) =>{
-const {page=1, limit=100,sort='{"_id":1}', ...filter} = req.query? req.query: ''
+const {page=1, limit=100,sort='_id', sortOrder=1, ...filter} = req.query? req.query: ''
 
 let sortValid;
-  try {sortValid = JSON.parse(sort)}
-  catch (e) { sortValid = {"_id":1}
+  try {
+    if (sortOrder, sortOrder==1||sortOrder==-1||sortOrder=='asc'||sortOrder=='desc') {
+    sortValid = JSON.parse(`{ "${sort}": "${sortOrder}"}`)}
+    else {sortValid= JSON.parse(`{ "${sort}": "1"}`)}
+  }
+  catch (e) { sortValid = {"_id":1};
   }
 
   let itemList;
