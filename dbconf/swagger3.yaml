@@ -829,6 +829,8 @@ definitions:
       dateAddItem:
         type: string
         format: date
+      stars:
+        type: "string"
       statusItems:
         type: "boolean"
       isPopular:
