@@ -160,6 +160,8 @@ paths:
         - in: query
           name: discount
         - in: query
+          name: stars
+        - in: query
           name: isPopular
         - in: query
           name: statusItems
