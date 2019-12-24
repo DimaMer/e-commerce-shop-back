@@ -10,9 +10,9 @@ const updateObj = req.body;
   }
 
   if(req.files && req.files.photo){
-    updateObj.photo = req.files.photo[0].path.split('public')[1];
+    updateObj.photo = req.files.photo[0].path;
     if (req.files.photoHead) {
-      updateObj.photoHead = req.files.photoHead[0].path.split('public')[1];
+      updateObj.photoHead = req.files.photoHead[0].path;
     }
   }
 

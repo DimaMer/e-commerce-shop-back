@@ -10,6 +10,131 @@ schemes:
   - https
   - http
 paths:
+  /info:
+    get:
+      tags:
+        - "mainInfo"
+      summary: Returns all mainInfo.
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#'
+    post:
+      tags:
+        - "mainInfo"
+      summary: "Add mainInfo in the store with form data"
+      description: ""
+      operationId: "add"
+      consumes:
+        - form-data
+      produces:
+        - "form-data"
+      parameters:
+        - in: formData
+          name: title
+          type: string
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: titleLong
+          type: string
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: address
+          type: string
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: phones
+          type: string
+          required: false
+          description: Description of file contents.
+        - in: formData
+          name: email
+          type: string
+          required: false
+          description: Description of file contents.
+        - in: formData
+          name: photo
+          type: file
+          required: true
+          description: The file to upload.
+      responses:
+        405:
+          description: "Invalid input"
+    put:
+      tags:
+        - "mainInfo"
+      summary: "Updated mainInfo"
+      description: "This can only be done by the logged in mainInfo."
+      operationId: "updateItem"
+      consumes:
+        - form-data
+      produces:
+        - "form-data"
+      parameters:
+        - in: formData
+          name: id
+          type: string
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: title
+          type: string
+          required: false
+          description: The file to upload.
+        - in: formData
+          name: titleLong
+          type: string
+          required: false
+          description: The file to upload.
+        - in: formData
+          name: address
+          type: string
+          required: false
+          description: The file to upload.
+        - in: formData
+          name: phones
+          type: string
+          required: false
+          description: Description of file contents.
+        - in: formData
+          name: email
+          type: string
+          required: false
+          description: Description of file contents.
+        - in: formData
+          name: photo
+          type: file
+          required: false
+          description: The file to upload.
+      responses:
+        400:
+          description: "Invalid mainInfo supplied"
+        404:
+          description: "mainInfo not found"
+    delete:
+      tags:
+        - "mainInfo"
+      summary: "Deletes a mainInfo"
+      description: ""
+      operationId: "delete mainInfo"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "delete - mainInfo - id"
+          required: true
+          type: "string"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "gallery not found"
+
   /gallery:
     get:
       tags:
