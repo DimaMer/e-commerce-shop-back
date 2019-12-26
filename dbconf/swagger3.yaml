@@ -67,7 +67,7 @@ paths:
     put:
       tags:
         - "mainInfo"
-      summary: "Updated mainInfo"
+      summary: "так як html підтримує лише пост і гет, то у свагері пут не підтримує загрузку файлів, при потребі змінити картинку потрібно видалити і заново створити запит"
       description: "This can only be done by the logged in mainInfo."
       operationId: "updateItem"
       consumes:
@@ -86,7 +86,12 @@ paths:
           required: false
           description: The file to upload.
         - in: formData
-          name: titleLong
+          name: titleUpper
+          type: string
+          required: false
+          description: The file to upload.
+        - in: formData
+          name: title
           type: string
           required: false
           description: The file to upload.
@@ -213,6 +218,7 @@ paths:
         405:
           description: "Invalid input"
     put:
+      deprecated: true
       tags:
         - "gallery"
       summary: "Updated gallery"
@@ -945,6 +951,8 @@ definitions:
       title:
         type: "string"
       titleLong:
+        type: "string"
+      titleUpper:
         type: "string"
       price:
         type: "integer"

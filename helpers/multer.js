@@ -18,7 +18,6 @@ exports.cloud = (req, res, next) => {
   })}
 /* Реалізація мультера (для завантаження картинок у сховище)
   upload - для завантаження фоографій
-  uploadCv - для завантаження резюме
   uploadNone - просто читання даних з form-data взагалі без файла
 */
 const storage = multer.diskStorage({
