@@ -86,11 +86,6 @@ paths:
           required: false
           description: The file to upload.
         - in: formData
-          name: titleUpper
-          type: string
-          required: false
-          description: The file to upload.
-        - in: formData
           name: title
           type: string
           required: false
@@ -286,6 +281,8 @@ paths:
           name: title
         - in: query
           name: titleLong
+        - in: query
+          name: titleUpper
         - in: query
           name: price
         - in: query
