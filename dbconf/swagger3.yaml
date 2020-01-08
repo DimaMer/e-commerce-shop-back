@@ -10,6 +10,58 @@ schemes:
   - https
   - http
 paths:
+  /info/update:
+    post:
+      tags:
+        - "mainInfo"
+      summary: "post"
+      description: "This can only be done by the logged in mainInfo."
+      operationId: "updateItem"
+      consumes:
+        - form-data
+      produces:
+        - "form-data"
+      parameters:
+        - in: formData
+          name: id
+          type: string
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: title
+          type: string
+          required: false
+          description: The file to upload.
+        - in: formData
+          name: title
+          type: string
+          required: false
+          description: The file to upload.
+        - in: formData
+          name: address
+          type: string
+          required: false
+          description: The file to upload.
+        - in: formData
+          name: phones
+          type: string
+          required: false
+          description: Description of file contents.
+        - in: formData
+          name: email
+          type: string
+          required: false
+          description: Description of file contents.
+        - in: formData
+          name: photo
+          type: file
+          required: false
+          description: The file to upload.
+      responses:
+        400:
+          description: "Invalid mainInfo supplied"
+        404:
+          description: "mainInfo not found"
   /info:
     get:
       tags:
@@ -64,57 +116,6 @@ paths:
       responses:
         405:
           description: "Invalid input"
-    put:
-      tags:
-        - "mainInfo"
-      summary: "так як html підтримує лише пост і гет, то у свагері пут не підтримує загрузку файлів, при потребі змінити картинку потрібно видалити і заново створити запит"
-      description: "This can only be done by the logged in mainInfo."
-      operationId: "updateItem"
-      consumes:
-        - form-data
-      produces:
-        - "form-data"
-      parameters:
-        - in: formData
-          name: id
-          type: string
-          required: true
-          description: The file to upload.
-        - in: formData
-          name: title
-          type: string
-          required: false
-          description: The file to upload.
-        - in: formData
-          name: title
-          type: string
-          required: false
-          description: The file to upload.
-        - in: formData
-          name: address
-          type: string
-          required: false
-          description: The file to upload.
-        - in: formData
-          name: phones
-          type: string
-          required: false
-          description: Description of file contents.
-        - in: formData
-          name: email
-          type: string
-          required: false
-          description: Description of file contents.
-        - in: formData
-          name: photo
-          type: file
-          required: false
-          description: The file to upload.
-      responses:
-        400:
-          description: "Invalid mainInfo supplied"
-        404:
-          description: "mainInfo not found"
     delete:
       tags:
         - "mainInfo"

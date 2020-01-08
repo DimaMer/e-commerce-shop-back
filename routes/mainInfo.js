@@ -13,9 +13,12 @@ router.route('/info')
   .get( catchErrors(getInfo) )
   .post( upload, cloud,
          catchErrors(addInfo) )
-  .put( uploads, cloud,
-        catchErrors(editInfo) )
+  // .post( uploads, cloud,
+  //       catchErrors(editInfo) )
   .delete(checkIfAuthenticated, [check('id').isMongoId()],
           catchErrors(deleteInfo));
+router.route('/info/update')
+.post( uploads, cloud,
+      catchErrors(editInfo) )
 
 module.exports = router;
