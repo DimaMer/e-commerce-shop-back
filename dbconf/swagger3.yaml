@@ -14,7 +14,7 @@ paths:
     post:
       tags:
         - "mainInfo"
-      summary: "post"
+      summary: "post "
       description: "This can only be done by the logged in mainInfo."
       operationId: "updateItem"
       consumes:
