@@ -29,26 +29,57 @@ exports.addInfo = async (req, res)=>{
 }
 
 
+// exports.editInfo = async (req, res) => {
+//   await validateData(req);
+//   const id = req.body.id;
+//
+//   const photoFile = req.files.photo;
+//
+//     const photo = photoFile[0].path||photoFile;
+//
+//   const editedInfo = await updateEntity(id, req, Info);
+//   console.log(11111111111,editedInfo);
+//   if(!editedInfo){
+//     if(req.files.photo){
+//              await unbindImageByAddress(photo);
+//     }
+//     const error = new Error('Помилка при виконанні оновлення!');
+//     error.status = 500;
+//     throw error;
+//   }
+//   if(req.files.photo){
+//     await unbindImageByAddress(editedInfo.photo);
+//   }
+//   res.status(200).send('Success!');
+// }
+
+
+
 exports.editInfo = async (req, res) => {
   await validateData(req);
+
   const id = req.body.id;
-  console.log(id);
-  const photoFile = req.files.photo;
-    const photo = photoFile[0].path||photoFile;
   const editedInfo = await updateEntity(id, req, Info);
+
+  if(req.files.photo){
+    await unbindImageByAddress(editedInfo.photo);
+  }
+    const photoFile = req.files.photo;
+
   if(!editedInfo){
     if(req.files.photo){
-             await unbindImageByAddress(photo);
+      await unbindImageByAddress(photoFile[0].path||photoFile);
     }
     const error = new Error('Помилка при виконанні оновлення!');
     error.status = 500;
     throw error;
   }
-  if(req.files.photo){
-    await unbindImageByAddress(editedInfo.photo);
-  }
+
+
   res.status(200).send('Success!');
 }
+
+
 
 exports.deleteInfo = async (req, res) => {
   await validateData(req);

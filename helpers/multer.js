@@ -22,7 +22,8 @@ exports.cloud = (req, res, next) => {
 */
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    if(file.fieldname==='photoHead') return cb(null, './public/photo');
+      console.log(file);
+      if(file.fieldname==='photoHead') return cb(null, './public/photo');
     return cb(null, `public/${file.fieldname}`);
   },
   filename: (req, file, cb) => {

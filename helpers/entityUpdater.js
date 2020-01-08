@@ -10,7 +10,7 @@ const updateObj = req.body;
   }
 
   if(req.files && req.files.photo){
-    updateObj.photo = req.files.photo[0].path;
+    updateObj.photo = req.files.photo[0].path||req.files.photo;
     if (req.files.photoHead) {
       updateObj.photoHead = req.files.photoHead[0].path;
     }
@@ -19,6 +19,7 @@ const updateObj = req.body;
   if(req.files && req.files.resume){
     updateObj.resume = req.files.resume[0].path.split('public')[1];
   }
+
 
   if(req.body.password){
     const salt = await bcrypt.genSalt(parseInt(process.env.SALT_ROUND));
