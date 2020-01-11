@@ -800,12 +800,12 @@ paths:
       operationId: "findAdminByData"
       produces:
         - "application/json"
-      parameters:
-        - name: "id"
-          in: "query"
-          description: "5dd66a92f3a23a1b4065fa2a"
-          required: true
-          type: "string"
+#      parameters:
+#        - name: "id"
+#          in: "query"
+#          description: "5dd66a92f3a23a1b4065fa2a"
+#          required: true
+#          type: "string"
       responses:
         200:
           description: "successful operation"

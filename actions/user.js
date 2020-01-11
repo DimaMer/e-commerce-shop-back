@@ -15,22 +15,30 @@ exports.getUserList = async (req, res) =>{
 
 exports.getSingleUser = async (req, res) =>{
   await validateData(req);
+  const {user}= req;
 
-  jwt.verify(req.query.id, process.env.SECRET,async (err, data) => {
-    if(err) {
-      res.sendStatus(403);
-    } else {
-      const foundedUser = await User.findById(data.id);
+
+  // jwt.verify(req.query.id, process.env.SECRET,async (err, data) => {
+  //   if(err) {
+  //     res.sendStatus(403);
+  //   } else {
+  //     const foundedUser = await User.findById(data.id);
+  //     if(!foundedUser){
+  //       const error = new Error('Адміна з таким id не існує!');
+  //       error.status = 404;
+  //       throw error;
+  //     }
+  //     res.status(200).json(foundedUser);
+  //   }
+  // });
+
+      const foundedUser = await User.findById(user.id);
       if(!foundedUser){
         const error = new Error('Адміна з таким id не існує!');
         error.status = 404;
         throw error;
       }
       res.status(200).json(foundedUser);
-    }
-  });
-
-
 
 
 }
@@ -64,7 +72,6 @@ exports.deleteUser = async (req, res) => {
 exports.login = async (req, res) => {
   const id =  req.user._id
   const token = await jwt.sign({id}, process.env.SECRET,{ expiresIn: '600s' });
-
   res.status(200).send(token);
 }
 
