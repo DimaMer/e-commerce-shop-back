@@ -8,7 +8,7 @@ app.use(express.static(__dirname + '/public'));
 //   origin: 'http://localhost:3000'
 // }));
 
-const cors = require('cors');
+// const cors = require('cors');
 const whitelist = ['http://localhost:3000']
 
 const corsOptions = {
