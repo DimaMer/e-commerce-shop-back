@@ -8,9 +8,9 @@ app.use(express.static(__dirname + '/public'));
 //   origin: 'http://dent-art-studio.herokuapp.com'
 // }));
 app.use(cors());
-// app.use(cors({
-//   credentials: true,
-// }));
+app.use(cors({
+   credentials: true,
+ }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -33,6 +33,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 const session = require('express-session');
+
 app.use(session({
   secret: process.env.JWTSECRET,
   resave: false,
