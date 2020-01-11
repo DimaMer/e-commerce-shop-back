@@ -70,9 +70,9 @@ exports.deleteUser = async (req, res) => {
 }
 
 exports.login = async (req, res) => {
-  const id =  req.user._id
-  const token = await jwt.sign({id}, process.env.SECRET,{ expiresIn: '600s' });
-  res.status(200).send(token);
+  // const id =  req.user._id
+  // const token = await jwt.sign({id}, process.env.SECRET,{ expiresIn: '600s' });
+  res.status(200).send("log" + req.user);
 }
 
 exports.logout = (req, res) => {
