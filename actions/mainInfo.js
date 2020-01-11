@@ -28,33 +28,6 @@ exports.addInfo = async (req, res)=>{
   res.status(200).json(createdInfo);
 }
 
-
-// exports.editInfo = async (req, res) => {
-//   await validateData(req);
-//   const id = req.body.id;
-//
-//   const photoFile = req.files.photo;
-//
-//     const photo = photoFile[0].path||photoFile;
-//
-//   const editedInfo = await updateEntity(id, req, Info);
-//   console.log(11111111111,editedInfo);
-//   if(!editedInfo){
-//     if(req.files.photo){
-//              await unbindImageByAddress(photo);
-//     }
-//     const error = new Error('Помилка при виконанні оновлення!');
-//     error.status = 500;
-//     throw error;
-//   }
-//   if(req.files.photo){
-//     await unbindImageByAddress(editedInfo.photo);
-//   }
-//   res.status(200).send('Success!');
-// }
-
-
-
 exports.editInfo = async (req, res) => {
   await validateData(req);
 

@@ -20,9 +20,9 @@ const {checkIfAuthenticated, isAdmin} = require('../helpers/authCheck');
 const router = express.Router();
 
 router.route('/user')
-  .get(catchErrors( getUserList ));
+  .get(checkIfAuthenticated, isAdmin,  catchErrors( getUserList ));
 router.route('/user/single')
-  .get( checkIfAuthenticated, isAdmin, [check('id').isMongoId()],
+  .get( checkIfAuthenticated,
         catchErrors(getSingleUser) )
   .post( uploadNone,
          [check('firstName').not().isEmpty(),
