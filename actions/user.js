@@ -73,7 +73,7 @@ exports.login = async (req, res) => {
   // const id =  req.user._id
   // const token = await jwt.sign({id}, process.env.SECRET,{ expiresIn: '600s' });
   const { firstName, lastName, email }=req.user
-  res.status(200).send(firstName+ lastName+ email);
+  res.status(200).send({firstName, lastName, email});
 }
 
 exports.logout = (req, res) => {
