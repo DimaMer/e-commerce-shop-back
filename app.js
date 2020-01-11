@@ -5,11 +5,12 @@ const app = express();
 console.log(__dirname+ '/public');
 app.use(express.static(__dirname + '/public'));
 // app.use (cors ({
-//   origin: 'http://dent-art-studio.herokuapp.com'
+//   origin: 'http://localhost:3000'
 // }));
 app.use(cors());
 app.use(cors({
    credentials: true,
+  origin: 'http://localhost:3000/'
  }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
