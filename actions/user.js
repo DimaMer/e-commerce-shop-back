@@ -17,7 +17,7 @@ exports.getSingleUser = async (req, res) =>{
   await validateData(req);
   const {user}= req;
 
-console.log('aaaaaaaaa',user)
+console.log('aaaaaaaaa',req)
   // jwt.verify(req.query.id, process.env.SECRET,async (err, data) => {
   //   if(err) {
   //     res.sendStatus(403);
