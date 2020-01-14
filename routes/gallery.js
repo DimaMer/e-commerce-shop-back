@@ -5,6 +5,7 @@ const {addGallery,
        getSingleGallery,
        editGallery,
        deleteGallery} = require('../controllers/gallery');
+
 const {catchErrors} = require('../errors/errorHandler');
 const { upload, cloud } = require('../helpers/multer');
 const {checkIfAuthenticated} = require('../helpers/authCheck');
