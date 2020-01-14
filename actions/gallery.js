@@ -2,6 +2,7 @@ const {validateData} = require('../helpers/dataValidator');
 const { Gallery } = require('../models/Gallery');
 const { Item } = require('../models/Item');
 const { unbindImageByAddress } = require('../helpers/unbindImages');
+const {updateEntity} = require('../helpers/entityUpdater');
 
 exports.getGalleryList = async (req, res) =>{
   const galleryList = await Gallery.find();
@@ -41,11 +42,8 @@ exports.addGallery = async (req, res)=> {
   if (await Item.findById(newGalleryItemData.idItem)) {
 
   const photoFile = req.files.photo;
-
-
     const photo = photoFile[0].path||photoFile;
        newGalleryItemData.photo = photo;
-
   const newGallery = await new Gallery(newGalleryItemData);
     if (!newGallery) {
     await unbindImageByAddress(photo);
@@ -53,13 +51,37 @@ exports.addGallery = async (req, res)=> {
     err.status = 404;
     throw err;
   }
-
     const createdGallery = await newGallery.save();
     // await Item.findByIdAndUpdate(newGalleryItemData.idItem, {$push: {photo: createdGallery.id}}, {new: true});
     res.status(200).json(createdGallery);
 }
   else res.status(200).json('kxm');
+}
 
+
+
+exports.editGallery = async (req, res) => {
+  await validateData(req);
+
+  const id = req.body.id;
+  const editedGallery = await updateEntity(id, req, Gallery);
+
+  if(req.files.photo){
+    await unbindImageByAddress(editedGallery.photo);
+  }
+  const photoFile = req.files.photo;
+
+  if(!editedGallery){
+    if(req.files.photo){
+      await unbindImageByAddress(photoFile[0].path||photoFile);
+    }
+    const error = new Error('Помилка при виконанні оновлення!');
+    error.status = 500;
+    throw error;
+  }
+
+
+  res.status(200).send('Success!');
 }
 
 exports.deleteGallery = async (req, res) => {

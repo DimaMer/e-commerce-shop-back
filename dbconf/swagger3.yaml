@@ -3,8 +3,8 @@ info:
   title: Ecomerse Api
   description: API.
   version: 1.0.0
-#host: localhost:7000
-host: e-commerce-shop-back.herokuapp.com
+host: localhost:7000
+#host: e-commerce-shop-back.herokuapp.com
 basePath: /api
 schemes:
   - https
@@ -159,6 +159,41 @@ paths:
           description: OK
           schema:
             $ref: '#'
+  /gallery/update:
+    post:
+      tags:
+        - "gallery"
+      summary: "update gallery in the store with form data"
+      description: ""
+      operationId: "updateGallery"
+      consumes:
+        - form-data
+      produces:
+        - "form-data"
+      parameters:
+        - in: formData
+          name: id
+          type: string
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: idItem
+          type: string
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: category
+          type: string
+          required: false
+          description: Description of file contents.
+        - in: formData
+          name: photo
+          type: file
+          required: true
+          description: The file to upload.
+      responses:
+        405:
+          description: "Invalid input"
   /gallery/single:
     get:
       deprecated: true
@@ -189,7 +224,7 @@ paths:
         - "gallery"
       summary: "Add gallery in the store with form data"
       description: ""
-      operationId: "updatePetWithForm"
+      operationId: "updateGallery"
       consumes:
         - form-data
       produces:
@@ -213,28 +248,6 @@ paths:
       responses:
         405:
           description: "Invalid input"
-    put:
-      deprecated: true
-      tags:
-        - "gallery"
-      summary: "Updated gallery"
-      description: "This can only be done by the logged in gallery."
-      operationId: "updateItem"
-      produces:
-        - "application/json"
-      consumes:
-        - "application/x-www-form-urlencoded"
-      parameters:
-        - name: "id"
-          in: "query"
-          description: "gallery Id"
-          required: true
-          type: "string"
-      responses:
-        400:
-          description: "Invalid gallery supplied"
-        404:
-          description: "gallery not found"
     delete:
       tags:
         - "gallery"
