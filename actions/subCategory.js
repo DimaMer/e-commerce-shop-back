@@ -40,10 +40,10 @@ exports.addSubCategory = async (req, res)=>{
 
 exports.editSubCategory = async (req, res) => {
   await validateData(req);
-  const {catId, _id} = req.query;
+  const {catId, idSubCat} = req.query;
   const newSubData = req.body;
   newSubData._id = catId;
-  const categoryLang = await Category.findOneAndUpdate({"_id": catId, "subCategorys._id": _id}, {$set: {'subCategorys.$': newSubData}}, {new: true});
+  const categoryLang = await Category.findOneAndUpdate({"_id": catId, "subCategorys._id": idSubCat}, {$set: {'subCategorys.$': newSubData}}, {new: true});
 
   res.status(200).send(categoryLang);
 }

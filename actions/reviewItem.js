@@ -43,7 +43,7 @@ exports.addReviewItem = async (req, res)=>{
 
 exports.editReviewItem = async (req, res) => {
   await validateData(req);
-  const id = req.query.idSubCat;
+  const id = req.query.id;
   const updatedReviewItem = await updateEntity(id, req, ReviewItem);
   if(!updatedReviewItem){
     const error = new Error('Помилка при виконанні оновлення!');
