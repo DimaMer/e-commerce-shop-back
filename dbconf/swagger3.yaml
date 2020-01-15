@@ -722,7 +722,7 @@ paths:
           description: "category"
           required: true
           type: "string"
-        - name: "_id"
+        - name: "idSubCat"
           in: "query"
           description: "Sub category _id"
           required: true
