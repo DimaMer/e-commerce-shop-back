@@ -22,7 +22,7 @@ router.route('/subCategory/single')
          check('name').not().isEmpty()],
          catchErrors(addSubCategory) )
   .put(checkIfAuthenticated,  uploadNone,
-        [check('idSubCat').isMongoId(),
+        [check('_id').isMongoId(),
          check('catId').isMongoId(),
          check('name').not().isEmpty()
          ],
