@@ -13,7 +13,7 @@ const whitelist = ['http://localhost:3000', '*', 'http://f32004c1.ngrok.io']
 
 const corsOptions = {
     credentials: true,
-  origin: function (origin, callback) {
+    origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
       callback(null, true)
     } else {
@@ -21,7 +21,7 @@ const corsOptions = {
     }
   }
 }
-// app.use(cors());
+app.use(cors());
 // app.use(cors({
 //    credentials: true,
 //   // origin: 'http://localhost:3000'
