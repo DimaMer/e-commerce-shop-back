@@ -9,7 +9,7 @@ app.use(express.static(__dirname + '/public'));
 // }));
 
 // const cors = require('cors');
-const whitelist = ['http://localhost:3000', '*', 'http://f32004c1.ngrok.io']
+const whitelist = ['http://localhost:3000', 'http://f32004c1.ngrok.io']
 
 const corsOptions = {
     credentials: true,
@@ -21,7 +21,7 @@ const corsOptions = {
     }
   }
 }
-app.use(cors());
+app.use(cors(corsOptions));
 // app.use(cors({
 //    credentials: true,
 //   // origin: 'http://localhost:3000'
