@@ -26,7 +26,7 @@ let sortValid;
       )
   else if (filter.title){
     itemList = await Item.paginate(
-        Item.find({ title: { $regex: filter.title+'.*' }} ).sort( sortValid ),
+        Item.find({ title: { $regex: filter.title+'.*', $options:'i' }} ).sort( sortValid ),
         { page: parseInt(page)||1, limit: parseInt(limit)||100 }
     )
   } else itemList = await Item.paginate(
