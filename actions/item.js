@@ -24,18 +24,25 @@ let sortValid;
       Item.find(filter).populate('photos').populate('reviews').sort( sortValid),
       { page: parseInt(page)||1, limit: parseInt(limit)||100 }
       )
-  else
-     itemList = await Item.paginate(
+  else if (filter.title){
+    itemList = await Item.paginate(
+        Item.find({ title: { $regex: filter.title+'.*' }} ).sort( sortValid ),
+        { page: parseInt(page)||1, limit: parseInt(limit)||100 }
+    )
+  } else itemList = await Item.paginate(
         Item.find(filter).sort( sortValid ),
         { page: parseInt(page)||1, limit: parseInt(limit)||100 }
     )
 
+if (filter.subCategory&&filter.category) {
   const temp = await Category.find().populate('subCategory')
   itemList.docs= _.map(itemList.docs, function(key) {
     key.categoryName =_.find(temp, { '_id': key.category });
-    key.subCategoryName =_.find(key.categoryName.subCategorys, { '_id': key.subCategory });
-    return  {categoryName:key.categoryName.name, subCategoryName:key.subCategoryName.name, ...key._doc }
-  })
+    if(key.subCategory&&key.categoryName.subCategorys){
+      key.subCategoryName =_.find(key.categoryName.subCategorys, { '_id': key.subCategory });
+    return  {categoryName:key.categoryName.name, subCategoryName:key.subCategoryName.name, ...key._doc }}
+    return
+  }) }
 
 
   itemList.length!==0?  res.status(200).json(itemList): res.status(404).json({query:filter});
