@@ -34,6 +34,14 @@ let sortValid;
         { page: parseInt(page)||1, limit: parseInt(limit)||100 }
     )
 
+  if ((!filter.subCategory)&&filter.category) {
+    const temp = await Category.find()
+    itemList.docs= _.map(itemList.docs, function(key) {
+      key.categoryName =_.find(temp, { '_id': key.category });
+        return  {categoryName:key.categoryName.name, ...key._doc }
+
+    }) }
+
 if (filter.subCategory&&filter.category) {
   const temp = await Category.find().populate('subCategory')
   itemList.docs= _.map(itemList.docs, function(key) {
