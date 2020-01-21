@@ -6,6 +6,7 @@ const ReviewItemSchema = new Schema({
     name: {type: String,required: true},
     stars: {type: String},
     text: {type: String},
+    photo: {type: String},
     status: { type: Boolean, required: true, default:false },
     date: { type: Date, required: true, default: Date.now },
 });

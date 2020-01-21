@@ -463,16 +463,35 @@ paths:
       description: ""
       operationId: "updatePetWithForm"
       consumes:
-        - "application/json"
+        - form-data
       produces:
-        - "application/json"
+        - "form-data"
       parameters:
-        - in: "body"
-          name: "body"
-          description: "reviewItem object add"
+        - in: formData
+          name: idItem
+          type: string
           required: true
-          schema:
-            $ref: "#/definitions/ReviewItem"
+          description: The file to upload.
+        - in: formData
+          name: name
+          type: string
+          required: false
+          description: Description of file contents.
+        - in: formData
+          name: stars
+          type: string
+          required: false
+          description: Description of file contents.
+        - in: formData
+          name: text
+          type: string
+          required: false
+          description: Description of file contents.
+        - in: formData
+          name: photo
+          type: file
+          required: true
+          description: The file to upload.
       responses:
         405:
           description: "Invalid input"
@@ -990,6 +1009,8 @@ definitions:
       name:
         type: "string"
       stars:
+        type: "string"
+      photo:
         type: "string"
       text:
         type: "string"

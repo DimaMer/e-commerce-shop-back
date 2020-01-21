@@ -9,7 +9,7 @@ app.use(express.static(__dirname + '/public'));
 // }));
 
 // const cors = require('cors');
-const whitelist = ['http://localhost:3000', 'http://0c873a38.ngrok.io', 'https://e-commerce-shop-back.herokuapp.com','https://e-commerce-shop-back.herokuapp.com/api/user/login']
+const whitelist = ['http://localhost:7000','http://localhost:3000', 'http://0c873a38.ngrok.io', 'https://e-commerce-shop-back.herokuapp.com','https://e-commerce-shop-back.herokuapp.com/api/user/login']
 
 const corsOptions = {
     credentials: true,

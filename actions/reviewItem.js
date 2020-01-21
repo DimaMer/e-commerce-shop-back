@@ -32,7 +32,18 @@ exports.addReviewItem = async (req, res)=>{
   const newReviewItemData = req.body;
 
  if (await Item.findById(newReviewItemData.idItem)) {
+     const photoFile = req.files.photo;
+     const photo = photoFile[0].path||photoFile;
+
+
   const newReviewItem = await new ReviewItem(newReviewItemData);
+     newReviewItem.photo = photo;
+     if (!newReviewItem) {
+         await unbindImageByAddress(photo);
+         const err = new Error('Нову фотографію не додано!');
+         err.status = 404;
+         throw err;
+     }
   const createdReviewItem = await newReviewItem.save();
   // await Item.findByIdAndUpdate(newReviewItemData.idItem, {$push: {reviews: createdReviewItem._id}}, {new: true});
   res.status(200).json(createdReviewItem);}
