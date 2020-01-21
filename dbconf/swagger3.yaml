@@ -965,6 +965,8 @@ definitions:
         type: "string"
       titleUpper:
         type: "string"
+      description:
+        type: "string"
       price:
         type: "integer"
         format: "int64"
