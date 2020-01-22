@@ -18,7 +18,7 @@ const ItemSchema = new Schema({
   statusItems: { type: Boolean, required: true, default: false },
   reviews: [{ type: Schema.Types.ObjectId, ref: 'ReviewItem' }],
   photos: [{ type: Schema.Types.ObjectId, ref: 'Gallery' }],
-
+  video: { type: String },
 
 });
 // ItemSchema.post(
