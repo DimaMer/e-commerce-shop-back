@@ -87,6 +87,7 @@ exports.editGallery = async (req, res) => {
 exports.deleteGallery = async (req, res) => {
   await validateData(req);
   const deletedGallery = await Gallery.findByIdAndDelete(req.query.id);
+  const deletedItem = await Item.update({ }, { $pull: { photos: req.query.id  } }, { multi: true })
   await unbindImageByAddress(deletedGallery.photo);
   res.status(200).json(deletedGallery);
 }
