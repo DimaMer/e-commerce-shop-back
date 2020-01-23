@@ -42,7 +42,8 @@ exports.editSubCategory = async (req, res) => {
   await validateData(req);
   const {catId, _id} = req.query;
   const newSubData = req.body;
-  newSubData._id = catId;
+  newSubData._id = _id;
+  console.log(newSubData);
   const categoryLang = await Category.findOneAndUpdate({"_id": catId, "subCategorys._id": _id}, {$set: {'subCategorys.$': newSubData}}, {new: true});
 
   res.status(200).send(categoryLang);
