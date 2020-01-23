@@ -43,7 +43,17 @@ paths:
           required: false
           description: The file to upload.
         - in: formData
-          name: phones
+          name: phones1
+          type: string
+          required: false
+          description: Description of file contents.
+        - in: formData
+          name: phones2
+          type: string
+          required: false
+          description: Description of file contents.
+        - in: formData
+          name: phones3
           type: string
           required: false
           description: Description of file contents.
@@ -99,7 +109,17 @@ paths:
           required: true
           description: The file to upload.
         - in: formData
-          name: phones
+          name: phones1
+          type: string
+          required: false
+          description: Description of file contents.
+        - in: formData
+          name: phones2
+          type: string
+          required: false
+          description: Description of file contents.
+        - in: formData
+          name: phones3
           type: string
           required: false
           description: Description of file contents.
