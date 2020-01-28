@@ -30,7 +30,7 @@ exports.getSingleGallery = async (req, res) =>{
 }
 
 exports.addGallery = async (req, res)=> {
-
+  console.log(100000000000,req.files.photo);
   if (!req.files.photo) {
     const err = new Error('Виберіть фотографію!');
     err.status = 404;

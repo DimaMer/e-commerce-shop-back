@@ -3,9 +3,9 @@ info:
   title: Ecomerse Api
   description: API.
   version: 1.0.0
-#host: localhost:7000
+host: localhost:7000
 host: e-commerce-shop-back.herokuapp.com
-basePath: /api
+#basePath: /api
 schemes:
   - https
   - http
@@ -207,6 +207,11 @@ paths:
           required: false
           description: Description of file contents.
         - in: formData
+          name: quality
+          type: integer
+          required: false
+          description: Description of file contents.
+        - in: formData
           name: photo
           type: file
           required: true
@@ -258,6 +263,11 @@ paths:
         - in: formData
           name: category
           type: string
+          required: false
+          description: Description of file contents.
+        - in: formData
+          name: quality
+          type: integer
           required: false
           description: Description of file contents.
         - in: formData
@@ -510,7 +520,7 @@ paths:
         - in: formData
           name: photo
           type: file
-          required: true
+          required: false
           description: The file to upload.
       responses:
         405:
