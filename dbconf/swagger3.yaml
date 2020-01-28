@@ -522,6 +522,11 @@ paths:
           type: file
           required: false
           description: The file to upload.
+        - in: formData
+          name: quality
+          type: integer
+          required: false
+          description: Description of file contents.
       responses:
         405:
           description: "Invalid input"

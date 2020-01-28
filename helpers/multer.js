@@ -9,34 +9,26 @@ cloudinary.config({
 const fs = require('fs');
 
 exports.cloud = (req, res, next) => {
-
-
-  let path =  req.files.photo? req.files.photo[0].filename: null;
-  // path =  path? req.files.photo[0].path: null;
-
-
-  cloudinary.uploader.upload(path, function(image, err ) {
+    let path =  req.files.photo? req.files.photo[0].path: null;
+    cloudinary.uploader.upload(path, function(image, err ) {
     if (err)return res.send(err);
     req.files.photo=image.url
-    return next();
+        return next();
   })}
 
 exports.convertImage = (req, res, next) => {
-
     let quality = Number(req.body.quality)
+    let path = req.files.photo ? req.files.photo[0].path : null;
     if (quality){
-        let path = req.files.photo ? req.files.photo[0].path : null;
-    sharp(req.files.photo[0].path)
+    sharp(path)
         .jpeg({
             quality: quality,
             chromaSubsampling: '4:4:4'
         })
         .toFile("./public/photo-resize/" + req.files.photo[0].filename + ".jpg", (err, info) => {
-            req.files.photo = "./public/photo-resize/" + req.files.photo[0].filename + ".jpg";
+            req.files.photo[0].path = "./public/photo-resize/" + req.files.photo[0].filename + ".jpg";
             fs.unlinkSync("./" + path);
-            return next()
-        });
-}
+        })}
     return next();
 }
 

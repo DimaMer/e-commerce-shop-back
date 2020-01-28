@@ -9,7 +9,6 @@ exports.getGalleryList = async (req, res) =>{
 
   const filter = req.query? req.query: ''
 
-  console.log(filter);
   const galList = await Gallery.find(filter)
 
   galList.length!==0? res.status(200).json(galList): res.status(404).json({query:filter});
@@ -30,7 +29,7 @@ exports.getSingleGallery = async (req, res) =>{
 }
 
 exports.addGallery = async (req, res)=> {
-  console.log(100000000000,req.files.photo);
+
   if (!req.files.photo) {
     const err = new Error('Виберіть фотографію!');
     err.status = 404;
