@@ -30,7 +30,7 @@ exports.getSingleReviewItem = async (req, res) =>{
 exports.addReviewItem = async (req, res)=>{
   await validateData(req);
   const newReviewItemData = req.body;
-
+    newReviewItemData.status = false;
  if (await Item.findById(newReviewItemData.idItem)) {
      const photo = req.files.photo||"";
   const newReviewItem = await new ReviewItem(newReviewItemData);
