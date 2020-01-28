@@ -30,7 +30,7 @@ let sortValid;
         { page: parseInt(page)||1, limit: parseInt(limit)||100 }
     )
   } else itemList = await Item.paginate(
-        Item.find(filter).populate('photos').populate('reviews').sort( sortValid ),
+        Item.find(filter).populate('photos').sort( sortValid ),
         { page: parseInt(page)||1, limit: parseInt(limit)||100 }
     )
 
