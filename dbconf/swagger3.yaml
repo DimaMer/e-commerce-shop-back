@@ -5,7 +5,7 @@ info:
   version: 1.0.0
 #host: localhost:7000
 host: e-commerce-shop-back.herokuapp.com
-#basePath: /api
+basePath: /api
 schemes:
   - https
   - http
