@@ -37,7 +37,7 @@ exports.convertImage = (req, res, next) => {
             return next()
         });
 }
-    return next()
+    return next();
 }
 
 /* Реалізація мультера (для завантаження картинок у сховище)
