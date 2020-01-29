@@ -13,7 +13,7 @@ const ItemSchema = new Schema({
   price: { type: Number },
   discount: { type: String },
   isPopular: {type: Boolean, default: false},
-  stars: { type: String },
+  stars: { type: Number },
   dateCreateItem: { type: Date, required: true, default: Date.now},
   statusItems: { type: Boolean, required: true, default: false },
   reviews: [{ type: Schema.Types.ObjectId, ref: 'ReviewItem' }],
