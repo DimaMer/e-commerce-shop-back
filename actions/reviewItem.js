@@ -2,7 +2,6 @@ const {validateData} = require('../helpers/dataValidator');
 const {ReviewItem} = require('../models/ReviewItem');
 const {Item} = require('../models/Item');
 const {updateEntity} = require('../helpers/entityUpdater');
-
 exports.getReviewItemList = async (req, res) => {
     const filter = req.query ? req.query : ''
     const itemList = await ReviewItem.find(filter)
