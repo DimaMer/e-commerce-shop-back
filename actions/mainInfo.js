@@ -34,13 +34,14 @@ exports.editInfo = async (req, res) => {
   const id = req.body.id;
   const editedInfo = await updateEntity(id, req, Info);
 
-  if(req.files.photo){
+  if(req.files&&req.files.photo){
     await unbindImageByAddress(editedInfo.photo);
   }
-    const photoFile = req.files.photo;
+
 
   if(!editedInfo){
-    if(req.files.photo){
+    const photoFile = req.files.photo;
+    if(req.files&&req.files.photo){
       await unbindImageByAddress(photoFile[0].path||photoFile);
     }
     const error = new Error('Помилка при виконанні оновлення!');
