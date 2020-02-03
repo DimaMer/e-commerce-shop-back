@@ -1,6 +1,7 @@
 const {validateData} = require('../helpers/dataValidator');
 const {Gallery} = require('../models/Gallery');
 const {Item} = require('../models/Item');
+const {MainInfo} = require('../models/MainInfo');
 const {unbindImageByAddress} = require('../helpers/unbindImages');
 const {updateEntity} = require('../helpers/entityUpdater');
 
@@ -28,10 +29,10 @@ exports.addGallery = async (req, res) => {
         throw err;
     }
     const newGalleryItemData = req.body;
-
+    const photoFile = req.files.photo;
+    const photo = photoFile[0].path || photoFile;
     if (await Item.findById(newGalleryItemData.idItem)) {
-        const photoFile = req.files.photo;
-        const photo = photoFile[0].path || photoFile;
+
         newGalleryItemData.photo = photo;
         const newGallery = await new Gallery(newGalleryItemData);
         if (!newGallery) {
@@ -42,7 +43,20 @@ exports.addGallery = async (req, res) => {
         }
         const createdGallery = await newGallery.save();
         res.status(200).json(createdGallery);
-    } else res.status(200).json('kxm');
+    } else if (await MainInfo.findById(newGalleryItemData.idItem)) {
+
+        newGalleryItemData.photo = photo;
+        const newGallery = await new Gallery(newGalleryItemData);
+        if (!newGallery) {
+            await unbindImageByAddress(photo);
+            const err = new Error('Нову фотографію не додано!');
+            err.status = 404;
+            throw err;
+        }
+        const createdGallery = await newGallery.save();
+        res.status(200).json(createdGallery);}
+else {unbindImageByAddress(photo);
+        res.status(200).json('kxm')};
 }
 
 exports.editGallery = async (req, res) => {
