@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const SubCategorySchema = new Schema({
-  name: { type: String, required: true },
+  name: { type:{ ua: String, ru: String, en: String }, required: true },
   subCatId: { type: String },
 });
 

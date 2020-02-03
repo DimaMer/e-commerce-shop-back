@@ -16,7 +16,10 @@ router.route('/category/single')
   .get( [check('id').isMongoId()],
         catchErrors(getSingleCategory) )
   .post(checkIfAuthenticated,
-         [check('name').not().isEmpty()],
+         [check('name.ua').not().isEmpty(),
+         check('name.en').not().isEmpty(),
+         check('name.ru').not().isEmpty()
+         ],
          catchErrors(addCategory) )
   .put(checkIfAuthenticated,
         [check('id').isMongoId()],

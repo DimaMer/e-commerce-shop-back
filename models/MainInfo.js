@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const {Schema} = mongoose;
 
 const MainInfoSchema = new Schema({
-  title: { type: String, required: true },
-  titleLong: { type: String, required: true },
-  address: {type: String, },
+  title: { type:{ ua: String, ru: String, en: String }, required: true },
+  titleLong: { type:{ ua: String, ru: String, en: String }, required: true },
+  address: { type:{ ua: String, ru: String, en: String }, required: true },
   phones1: {type: String, min: 6, },
   phones2: {type: String, min: 6, },
   phones3: {type: String, min: 6, },

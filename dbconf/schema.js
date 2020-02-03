@@ -220,7 +220,7 @@ const mutation = new graphql.GraphQLObjectType({
                 category: {type: new graphql.GraphQLNonNull(graphql.GraphQLString)},
                 subCategory: {type: new graphql.GraphQLNonNull(graphql.GraphQLString)},
                 title: {type: new graphql.GraphQLNonNull(graphql.GraphQLString)},
-                titleLong: {type: new graphql.GraphQLNonNull(graphql.GraphQLString)},
+                titleLong_ua: {type: new graphql.GraphQLNonNull(graphql.GraphQLString)},
                 price: {type: new graphql.GraphQLNonNull(graphql.GraphQLString)},
                 discount: {type: new graphql.GraphQLNonNull(graphql.GraphQLString)},
                 statusItems: {type: new graphql.GraphQLNonNull(graphql.GraphQLString)}

@@ -4,10 +4,10 @@ const mongoosePaginate = require('mongoose-paginate');
 const {Category} = require('../models/Category');
 
 const ItemSchema = new Schema({
-  title: { type: String },
-  titleUpper: { type: String },
-  description: {type: String },
-  titleLong: { type: String, required: true },
+  title: { ua: String, ru: String, en: String  },
+  titleUpper: {  ua: String, ru: String, en: String   },
+  description: { ua: String, ru: String, en: String   },
+  titleLong: { type:{ ua: String, ru: String, en: String }, required: true },
   category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
   subCategory: { type: Schema.Types.ObjectId, ref: 'SubCategory', required: true },
   price: { type: Number },

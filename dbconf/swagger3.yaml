@@ -3,8 +3,8 @@ info:
   title: Ecomerse Api
   description: API.
   version: 1.0.0
-#host: localhost:7000
-host: e-commerce-shop-back.herokuapp.com
+host: localhost:7000
+#host: e-commerce-shop-back.herokuapp.com
 basePath: /api
 schemes:
   - https
@@ -1014,13 +1014,41 @@ definitions:
         type: "string"
         required: true
       title:
-        type: "string"
+        type: object
+        properties:
+          ua:
+            type: "string"
+          ru:
+            type: "string"
+          en:
+            type: "string"
       titleLong:
-        type: "string"
+        type: object
+        properties:
+          ua:
+            type: "string"
+          ru:
+            type: "string"
+          en:
+            type: "string"
       titleUpper:
-        type: "string"
+        type: object
+        properties:
+          ua:
+            type: "string"
+          ru:
+            type: "string"
+          en:
+            type: "string"
       description:
-        type: "string"
+        type: object
+        properties:
+          ua:
+            type: "string"
+          ru:
+            type: "string"
+          en:
+            type: "string"
       price:
         type: "integer"
         format: "int64"
@@ -1056,14 +1084,28 @@ definitions:
     type: "object"
     properties:
       name:
-        type: "string"
+        type: object
+        properties:
+          ua:
+            type: "string"
+          ru:
+            type: "string"
+          en:
+            type: "string"
       catId:
         type: "string"
   subCategory:
     type: "object"
     properties:
       name:
-        type: "string"
+        type: object
+        properties:
+          ua:
+            type: "string"
+          ru:
+            type: "string"
+          en:
+            type: "string"
       subCatId:
         type: "string"
 #      reviews:
