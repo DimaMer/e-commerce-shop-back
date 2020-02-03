@@ -109,12 +109,32 @@ paths:
           required: true
           description: The file to upload.
         - in: formData
-          name: titleLong
+          name: titleLong.ua
           type: string
           required: true
           description: The file to upload.
         - in: formData
-          name: address
+          name: titleLong.ru
+          type: string
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: titleLong.en
+          type: string
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: address.ua
+          type: string
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: address.ru
+          type: string
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: address.en
           type: string
           required: true
           description: The file to upload.
