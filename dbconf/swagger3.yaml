@@ -94,7 +94,17 @@ paths:
         - "form-data"
       parameters:
         - in: formData
-          name: title
+          name: title.ua
+          type: string
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: title.ru
+          type: string
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: title.en
           type: string
           required: true
           description: The file to upload.
