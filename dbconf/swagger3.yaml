@@ -28,19 +28,49 @@ paths:
           required: true
           description: The file to upload.
         - in: formData
-          name: title
+          name: title.ua
           type: string
-          required: false
+          required: true
           description: The file to upload.
         - in: formData
-          name: title
+          name: title.ru
           type: string
-          required: false
+          required: true
           description: The file to upload.
         - in: formData
-          name: address
+          name: title.en
           type: string
-          required: false
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: titleLong.ua
+          type: string
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: titleLong.ru
+          type: string
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: titleLong.en
+          type: string
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: address.ua
+          type: string
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: address.ru
+          type: string
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: address.en
+          type: string
+          required: true
           description: The file to upload.
         - in: formData
           name: phones1
@@ -65,7 +95,7 @@ paths:
         - in: formData
           name: photo
           type: file
-          required: false
+          required: true
           description: The file to upload.
       responses:
         400:
