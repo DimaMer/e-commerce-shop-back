@@ -1,7 +1,7 @@
 const {validateData} = require('../helpers/dataValidator');
 const {Gallery} = require('../models/Gallery');
 const {Item} = require('../models/Item');
-const {MainInfo} = require('../models/MainInfo');
+const {Info} = require('../models/MainInfo');
 const {unbindImageByAddress} = require('../helpers/unbindImages');
 const {updateEntity} = require('../helpers/entityUpdater');
 
@@ -31,8 +31,8 @@ exports.addGallery = async (req, res) => {
     const newGalleryItemData = req.body;
     const photoFile = req.files.photo;
     const photo = photoFile[0].path || photoFile;
+    console.log(await Item.findById(newGalleryItemData.idItem))
     if (await Item.findById(newGalleryItemData.idItem)) {
-
         newGalleryItemData.photo = photo;
         const newGallery = await new Gallery(newGalleryItemData);
         if (!newGallery) {
@@ -43,13 +43,12 @@ exports.addGallery = async (req, res) => {
         }
         const createdGallery = await newGallery.save();
         res.status(200).json(createdGallery);
-    } else if (await MainInfo.findById(newGalleryItemData.idItem)) {
-
+    } else if (await Info.findById(newGalleryItemData.idItem)) {
         newGalleryItemData.photo = photo;
         const newGallery = await new Gallery(newGalleryItemData);
         if (!newGallery) {
             await unbindImageByAddress(photo);
-            const err = new Error('Нову фотографію не додано!');
+            const err = new Error('Нову doc не додано!');
             err.status = 404;
             throw err;
         }

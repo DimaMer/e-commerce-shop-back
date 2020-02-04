@@ -11,10 +11,8 @@ passport.serializeUser((client, done)=>{
 });
 
 passport.deserializeUser((id, done)=>{
-  console.log(`We are going to deserialize this: ${id}`);
     User.findById(id)
   .then( client =>{
-    console.log('foundClient', client);
     return done(null,client);
   });
 });

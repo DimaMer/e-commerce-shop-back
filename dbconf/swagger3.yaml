@@ -13,7 +13,7 @@ paths:
   /info/update:
     post:
       tags:
-        - "mainInfo"
+        - "mainInfoUpdate"
       summary: "post "
       description: "This can only be done by the logged in mainInfo."
       operationId: "updateItem"
@@ -242,7 +242,7 @@ paths:
   /gallery/update:
     post:
       tags:
-        - "gallery"
+        - "galleryUpdate"
       summary: "update gallery in the store with form data"
       description: ""
       operationId: "updateGallery"
