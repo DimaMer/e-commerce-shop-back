@@ -35,11 +35,11 @@ exports.getItemList = async (req, res) => {
         if (!local) {
 
         itemList = await Item.paginate(
-            Item.find({$or:[{"title.ua": filter.title },{"title.ru": filter.title },{"title.en": filter.title }]}).populate('reviews').sort(sortValid).sort(sortValid),
+            Item.find({$or:[{"title.ua": filter.title },{"title.ru": filter.title },{"title.en": filter.title }]}).populate('photos').populate('reviews').sort(sortValid),
             {page: parseInt(page) || 1, limit: parseInt(limit) || 100}
         )
         } else  itemList = await Item.paginate(
-        Item.find({$or:[{[`title.${local}`]: filter.title }]}).populate('reviews').sort(sortValid).sort(sortValid),
+        Item.find({$or:[{[`title.${local}`]: filter.title }]}).populate('photos').populate('reviews').sort(sortValid),
         {page: parseInt(page) || 1, limit: parseInt(limit) || 100}
     )
 
