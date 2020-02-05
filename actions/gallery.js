@@ -44,6 +44,7 @@ exports.addGallery = async (req, res) => {
         const createdGallery = await newGallery.save();
         res.status(200).json(createdGallery);
     } else if (await Info.findById(newGalleryItemData.idItem)) {
+        
         newGalleryItemData.photo = photo;
         const newGallery = await new Gallery(newGalleryItemData);
         if (!newGallery) {

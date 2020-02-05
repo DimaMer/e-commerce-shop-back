@@ -32,6 +32,7 @@ exports.getItemList = async (req, res) => {
     }
     else if (filter.title) {
     filter.title = {$regex: filter.title + '.*', $options: 'i'}
+        console.log(local)
         if (!local) {
 
         itemList = await Item.paginate(
