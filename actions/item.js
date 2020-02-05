@@ -8,7 +8,7 @@ const {SubCategory} = require('../models/SubCategory');
 const _ = require('lodash');
 
 exports.getItemList = async (req, res) => {
-    const {page = 1, limit = 100, sort = '_id', sortOrder = 1, local='ua', ...filter} = req.query ? req.query : ''
+    const {page = 1, limit = 100, sort = '_id', sortOrder = 1, local, ...filter} = req.query ? req.query : ''
     let sortValid;
 
     try {
@@ -32,12 +32,17 @@ exports.getItemList = async (req, res) => {
     }
     else if (filter.title) {
     filter.title = {$regex: filter.title + '.*', $options: 'i'}
+        if (!local) {
+
         itemList = await Item.paginate(
-            Item.find({[`title.${local}`]: filter.title }).sort(sortValid),
+            Item.find({$or:[{"title.ua": filter.title },{"title.ru": filter.title },{"title.en": filter.title }]}).populate('reviews').sort(sortValid).sort(sortValid),
             {page: parseInt(page) || 1, limit: parseInt(limit) || 100}
         )
-        console.log(filter);
-        console.log(itemList);
+        } else  itemList = await Item.paginate(
+        Item.find({$or:[{[`title.${local}`]: filter.title }]}).populate('reviews').sort(sortValid).sort(sortValid),
+        {page: parseInt(page) || 1, limit: parseInt(limit) || 100}
+    )
+
     } else {
         itemList = await Item.paginate(
             Item.find(filter).populate('photos').populate('reviews').sort(sortValid),
