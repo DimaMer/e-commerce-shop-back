@@ -32,17 +32,19 @@ exports.getItemList = async (req, res) => {
     }
     else if (filter.title) {
     filter.title = {$regex: filter.title + '.*', $options: 'i'}
-        console.log(local)
+
         if (!local) {
 
         itemList = await Item.paginate(
             Item.find({$or:[{"title.ua": filter.title },{"title.ru": filter.title },{"title.en": filter.title }]}).populate('photos').populate('reviews').sort(sortValid),
             {page: parseInt(page) || 1, limit: parseInt(limit) || 100}
         )
-        } else  itemList = await Item.paginate(
-        Item.find({$or:[{[`title.${local}`]: filter.title }]}).populate('photos').populate('reviews').sort(sortValid),
+        } else  {
+            const use = local==="uk"? "ua": local
+            itemList = await Item.paginate(
+        Item.find({$or:[{[`title.${use}`]: filter.title }]}).populate('photos').populate('reviews').sort(sortValid),
         {page: parseInt(page) || 1, limit: parseInt(limit) || 100}
-    )
+    )}
 
     } else {
         itemList = await Item.paginate(
