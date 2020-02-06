@@ -53,7 +53,7 @@ app.use(session({
   secret: process.env.JWTSECRET,
   resave: false,
   saveUninitialized: true,
-    sameSite: 'none',
+    sameSite: 'strict',
     secure: true,
   cookie: {maxAge: 24 *60 *60 * 1000,
       sameSite: 'none',
