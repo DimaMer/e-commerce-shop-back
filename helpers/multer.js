@@ -50,10 +50,10 @@ const storage = multer.diskStorage({
     const path =  req.files.photo[0].path? req.files.photo[0].path: null;
     console.log(777,req)
       if(file.fieldname==='photoHead') return cb(null, './public/photo');
-    return cb(null, "./public/photo");
+    return cb(null, "~/public/photo/");
   },
   filename: (req, file, cb) => {
-     cb(null, `${file.fieldname}-${Date.now()}-${file.originalname}`);
+     cb(null, `pp${file.fieldname}-${Date.now()}-${file.originalname}`);
   },
 });
 
