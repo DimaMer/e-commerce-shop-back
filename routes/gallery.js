@@ -18,7 +18,7 @@ router.route('/gallery/update')
 router.route('/gallery/single')
     .get( [check('id').isMongoId()],
         catchErrors(getSingleGallery) )
-    .post(  upload, convertImage, cloud,   catchErrors(addGallery) )
+    .post(  upload, cloud,   catchErrors(addGallery) )
     .delete( [check('id').isMongoId()],
         catchErrors(deleteGallery));
 
