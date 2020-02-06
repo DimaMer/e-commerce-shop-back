@@ -14,7 +14,6 @@ const whitelist = [/inary\.com$/,'https://cloudinary.com','http://e-commerce-fro
 const corsOptions = {
     SameSite: "none",
     credentials: true,
-    "Access-Control-Allow-Origin": "*",
     origin: function (origin, callback) {
     if (1) {
       callback(null, true)

@@ -30,7 +30,7 @@ exports.convertImage = (req, res, next) => {
             if (err)return res.send(err);
             req.files.photo[0].path = "./public/photo-resize/" + req.files.photo[0].filename + ".jpg";
             fs.unlinkSync("./" + path);
-            return next();
+
         })
     }
     return next();
