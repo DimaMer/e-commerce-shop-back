@@ -26,10 +26,12 @@ exports.convertImage = (req, res, next) => {
             chromaSubsampling: '4:4:4'
         })
         .toFile("./public/photo-resize/" + req.files.photo[0].filename + ".jpg", (err, info) => {
+            if (err)return res.send(err);
             req.files.photo[0].path = "./public/photo-resize/" + req.files.photo[0].filename + ".jpg";
             fs.unlinkSync("./" + path);
-        })}
-    return next();
+            return next();
+        })
+    }
 }
 
 /* Реалізація мультера (для завантаження картинок у сховище)
