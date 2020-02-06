@@ -14,7 +14,8 @@ const whitelist = ['http://e-commerce-front.herokuapp.com','http://localhost:700
 const corsOptions = {
     credentials: true,
     origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
+    // if (whitelist.indexOf(origin) !== -1 || !origin) {
+        if (1) {
       callback(null, true)
     } else {
       callback(new Error('Not allowed by CORS'))
