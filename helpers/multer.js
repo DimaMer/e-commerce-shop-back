@@ -7,12 +7,13 @@ cloudinary.config({
   api_secret: 'NrPljZnLRI5HxIRTytVOwiBaQy0',
 });
 const fs = require('fs');
+const path = require('path')
 
 exports.cloud = (req, res, next) => {
-    let path =  (req.files&&req.files.photo)? req.files.photo[0].path: null;
+    let path1 =  (req.files&&req.files.photo)? req.files.photo[0].path: null;
     console.log('cloud', path)
 
-    cloudinary.uploader.upload(path, function(image, err ) {
+    cloudinary.uploader.upload(path1, function(image, err ) {
     if (err)return res.send(err);
 
 
@@ -23,9 +24,9 @@ exports.cloud = (req, res, next) => {
 
 exports.convertImage = (req, res, next) => {
     let quality = Number(req.body.quality)
-    let path = req.files.photo ? req.files.photo[0].path : null;
+    let path1 = req.files.photo ? req.files.photo[0].path : null;
     if (quality){
-    sharp(path)
+    sharp(path1)
         .jpeg({
             quality: quality,
             chromaSubsampling: '4:4:4'
@@ -47,8 +48,10 @@ exports.convertImage = (req, res, next) => {
 */
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const path =  req.files.photo[0].path? req.files.photo[0].path: null;
-    console.log(777,req)
+    const path1 =  req.files.photo[0].path? req.files.photo[0].path: null;
+      console.log(777,path)
+
+      console.log(777,__dirname)
       if(file.fieldname==='photoHead') return cb(null, './public/photo');
     return cb(null, "./");
   },
