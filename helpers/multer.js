@@ -13,7 +13,7 @@ exports.cloud = (req, res, next) => {
     cloudinary.uploader.upload(path, function(image, err ) {
     if (err)return res.send(err);
     if (image.url) {req.files.photo=image.url}
-    console.log('cloud', req.files.photo)
+    console.log('cloud', req.files)
         return next();
   })}
 
