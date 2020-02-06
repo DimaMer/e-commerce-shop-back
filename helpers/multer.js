@@ -13,6 +13,7 @@ exports.cloud = (req, res, next) => {
     cloudinary.uploader.upload(path, function(image, err ) {
     if (err)return res.send(err);
     if (image.url) {req.files.photo=image.url}
+    console.log('cloud', req.files.photo)
         return next();
   })}
 
@@ -32,6 +33,7 @@ exports.convertImage = (req, res, next) => {
             return next();
         })
     }
+    return next();
 }
 
 /* Реалізація мультера (для завантаження картинок у сховище)
