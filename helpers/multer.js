@@ -7,39 +7,42 @@ cloudinary.config({
   api_secret: 'NrPljZnLRI5HxIRTytVOwiBaQy0',
 });
 const fs = require('fs');
-const path = require('path')
 
 exports.cloud = (req, res, next) => {
-    let path1 =  (req.files&&req.files.photo)? req.files.photo[0].path: null;
-    console.log('cloud', path)
-
-    cloudinary.uploader.upload(path1, function(image, err ) {
-    if (err)return res.send(err);
 
 
+    let [{path}] =  req.files.photo||[{}];
+    if (!path) return next()
+    console.log(222222,path);
+    cloudinary.uploader.upload(path, function(image, err ) {
+    if (err) return res.send(err);
 
     if (image.url) {req.files.photo=image.url}
+    console.log('cloud', req.files.photo)
         return next();
   })}
 
 exports.convertImage = (req, res, next) => {
     let quality = Number(req.body.quality)
-    let path1 = req.files.photo ? req.files.photo[0].path : null;
-    if (quality){
-    sharp(path1)
+    let [{path, filename}] =  req.files.photo||[{}];
+    if (!path) return next();
+    if (!quality) return next();
+    console.log('filenameSharp',filename)
+    console.log('filenameSharp',path)
+
+    sharp(path)
         .jpeg({
             quality: quality,
             chromaSubsampling: '4:4:4'
         })
-        .toFile("./public/photo-resize/" + req.files.photo[0].filename + ".jpg", (err, info) => {
+        .toFile("./public/photo-resize/" + filename+ ".jpg", (err, info) => {
             if (err)return res.send(err);
             req.files.photo[0].path = "./public/photo-resize/" + req.files.photo[0].filename + ".jpg";
             fs.unlinkSync("./" + path);
-
-
+            console.log('filenameSharp111111111',req.files)
+            return next();
         })
-    }
-    return next();
+
 }
 
 /* Реалізація мультера (для завантаження картинок у сховище)
@@ -48,22 +51,22 @@ exports.convertImage = (req, res, next) => {
 */
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const path1 =  req.files.photo[0].path? req.files.photo[0].path: null;
-      // console.log(777,path)
 
-      console.log(777,__dirname)
-      if(file.fieldname==='photoHead') return cb(null, './public/photo');
-    return cb(null, __dirname);
+      console.log(1111111,file);
+      console.log(1111111,req.files);
+
+    return cb(null, `public/${file.fieldname}`);
   },
   filename: (req, file, cb) => {
-     cb(null, `pp${file.fieldname}-${Date.now()}-${file.originalname}`);
+      console.log(1111111,file);
+      console.log(1111111,req.files);
+      return cb(null, `${file.fieldname}-${Date.now()}-${file.originalname}`);
   },
 });
 
 exports.upload =  multer({ storage }).fields([
     { name: 'photo', maxCount: 1 }
   ]);
-
 
 exports.uploadCv = multer({ storage }).fields([
   { name: 'resume', maxCount: 1 }
@@ -72,7 +75,4 @@ exports.uploadCv = multer({ storage }).fields([
 exports.uploadNone = multer().none();
 
 
-exports.uploads =  multer({ storage }).fields([
-  { name: 'photo', maxCount: 1 },
-  { name: 'photoHead', maxCount: 1 }
-]);
+exports.uploads =  multer({ storage }).single( 'photo');

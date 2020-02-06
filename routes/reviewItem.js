@@ -15,7 +15,7 @@ router.route('/reviewitem')
 router.route('/reviewitem/single')
   .get( [check('id').isMongoId()],
         catchErrors(getSingleReviewItem) )
-  .post( upload,  cloud,
+  .post( upload,  convertImage, cloud,
          [check('idItem').isMongoId()
        ],
          catchErrors(addReviewItem) )
