@@ -9,16 +9,11 @@ cloudinary.config({
 const fs = require('fs');
 
 exports.cloud = (req, res, next) => {
-
-
     let [{path}] =  req.files.photo||[{}];
     if (!path) return next()
-    console.log(222222,path);
     cloudinary.uploader.upload(path, function(image, err ) {
     if (err) return res.send(err);
-
     if (image.url) {req.files.photo=image.url}
-    console.log('cloud', req.files.photo)
         return next();
   })}
 
@@ -27,9 +22,6 @@ exports.convertImage = (req, res, next) => {
     let [{path, filename}] =  req.files.photo||[{}];
     if (!path) return next();
     if (!quality) return next();
-    console.log('filenameSharp',filename)
-    console.log('filenameSharp',path)
-
     sharp(path)
         .jpeg({
             quality: quality,
@@ -39,7 +31,6 @@ exports.convertImage = (req, res, next) => {
             if (err)return res.send(err);
             req.files.photo[0].path = "./public/photo-resize/" + req.files.photo[0].filename + ".jpg";
             fs.unlinkSync("./" + path);
-            console.log('filenameSharp111111111',req.files)
             return next();
         })
 
@@ -51,15 +42,9 @@ exports.convertImage = (req, res, next) => {
 */
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-
-      console.log(1111111,file);
-      console.log(1111111,req.files);
-
     return cb(null, `public/${file.fieldname}`);
   },
   filename: (req, file, cb) => {
-      console.log(1111111,file);
-      console.log(1111111,req.files);
       return cb(null, `${file.fieldname}-${Date.now()}-${file.originalname}`);
   },
 });

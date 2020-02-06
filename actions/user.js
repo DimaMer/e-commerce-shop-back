@@ -30,7 +30,11 @@ exports.getSingleUser = async (req, res) =>{
   //     res.status(200).json(foundedUser);
   //   }
   // });
-
+  if(!user){
+    const error = new Error('id не передано');
+    error.status = 404;
+    throw error;
+  }
       const foundedUser = await User.findById(user.id);
       if(!foundedUser){
         const error = new Error('Адміна з таким id не існує!');
