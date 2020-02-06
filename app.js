@@ -13,6 +13,8 @@ const whitelist = [/inary\.com$/,'https://cloudinary.com','http://e-commerce-fro
 
 const corsOptions = {
     credentials: true,
+    sameSite: 'none',
+    secure: true,
     origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
       callback(null, true)
@@ -54,9 +56,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 
-  cookie: {maxAge: 24 *60 *60 * 1000,
-      sameSite: 'none',
-      secure: true,},
+  cookie: {maxAge: 24 *60 *60 * 1000},
   httpOnly: true
 }));
 
