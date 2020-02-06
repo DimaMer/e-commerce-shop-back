@@ -28,6 +28,5 @@ const updateObj = req.body;
   }
 
   const foundedEmployee = await Entity.findByIdAndUpdate(id, {$set: updateObj});
-  console.log('foundedEmployee', foundedEmployee);
   return foundedEmployee;
 }

@@ -37,7 +37,7 @@ exports.addReviewItem = async (req, res) => {
     newReviewItemData.status = false;
     if (await Item.findById(newReviewItemData.idItem)) {
         const {photo=" "} = req.files;
-        console.log(photo);
+
         const newReviewItem = await new ReviewItem(newReviewItemData);
         newReviewItem.photo = photo;
         if (!newReviewItem) {

@@ -17,7 +17,6 @@ exports.getSingleUser = async (req, res) =>{
   await validateData(req);
   const {user}= req;
 
-//console.log('aaaaaaaaa',req)
   // jwt.verify(req.query.id, process.env.SECRET,async (err, data) => {
   //   if(err) {
   //     res.sendStatus(403);
@@ -131,7 +130,7 @@ exports.resetUsernData = async(req, res) => {
     res.send({
       message:"Повідомлення успішно відправлене",
     });
-    console.log(info);
+
   });
 }
 

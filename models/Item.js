@@ -24,12 +24,11 @@ const ItemSchema = new Schema({
 // ItemSchema.post(
 //     "find", async function(doc) {
 //       let a = await Category.findById(this.category)
-//       console.log(111,doc.map(id=>id.category));
+//
 //       // const a= await Item.findByIdAndUpdate(doc.idItem, {$push: {photos: doc.id}}, {new: true});
-//       // console.log('%s has been saved', a);
+//
 //     });
 // ItemSchema.virtual('cat').get(function () {
-//   console.log(1);
 //   return this.category + ' ' + this.category;
 // });
 

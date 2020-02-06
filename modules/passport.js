@@ -22,7 +22,7 @@ passport.use(new LocalStrategy(
   async function(email, password, done) {
 
     const foundedUser = await User.findOne({ email });
-      console.log(foundedUser)
+
     if(!foundedUser){
       return done(null, false);
     }

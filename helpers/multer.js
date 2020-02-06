@@ -30,10 +30,11 @@ exports.convertImage = (req, res, next) => {
             if (err)return res.send(err);
             req.files.photo[0].path = "./public/photo-resize/" + req.files.photo[0].filename + ".jpg";
             fs.unlinkSync("./" + path);
-
+console.log(11111111,req.headers)
+            return next();
         })
     }
-    return next();
+
 }
 
 /* Реалізація мультера (для завантаження картинок у сховище)

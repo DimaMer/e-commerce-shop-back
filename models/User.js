@@ -15,7 +15,7 @@ const UserSchema = new Schema(
 );
 
 UserSchema.pre('save', async function(){
-    console.log(22)
+
   const salt = await bcrypt.genSalt(parseInt(process.env.SALT_ROUND));
   const hashPassword = await bcrypt.hash(this.password, salt);
   // const hashRole = await bcrypt.hash('admin', salt);

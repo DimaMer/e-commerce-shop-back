@@ -41,8 +41,6 @@ exports.getItemList = async (req, res) => {
         )
         } else  {
             const use = local==="uk"? "ua": local
-
-            console.log(use);
             itemList = await Item.paginate(
         Item.find({$or:[{[`title.${use}`]: filter.title }]}).populate('photos').populate('reviews').sort(sortValid),
         {page: parseInt(page) || 1, limit: parseInt(limit) || 100}
