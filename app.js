@@ -12,6 +12,7 @@ app.use(express.static(__dirname + '/public'));
 const whitelist = [/inary\.com$/,'https://cloudinary.com','http://e-commerce-front.herokuapp.com','http://localhost:7000','http://localhost:3000',/.ngrok\.com$/, 'http://2b606649.ngrok.io', 'https://e-commerce-shop-back.herokuapp.com','https://e-commerce-shop-back.herokuapp.com/api/user/login']
 
 const corsOptions = {
+    SameSite: "none",
     credentials: true,
     origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
