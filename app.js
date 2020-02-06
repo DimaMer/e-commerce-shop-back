@@ -15,7 +15,7 @@ const corsOptions = {
     SameSite: "none",
     credentials: true,
     origin: function (origin, callback) {
-    if (1) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
       callback(null, true)
     } else {
       callback(new Error('Not allowed by CORS'))
