@@ -9,13 +9,12 @@ app.use(express.static(__dirname + '/public'));
 // }));
 
 // const cors = require('cors');
-const whitelist = ['http://e-commerce-front.herokuapp.com','http://localhost:7000','http://localhost:3000',/.ngrok\.com$/, 'http://2b606649.ngrok.io', 'https://e-commerce-shop-back.herokuapp.com','https://e-commerce-shop-back.herokuapp.com/api/user/login']
+const whitelist = ['https://cloudinary.com','http://e-commerce-front.herokuapp.com','http://localhost:7000','http://localhost:3000',/.ngrok\.com$/, 'http://2b606649.ngrok.io', 'https://e-commerce-shop-back.herokuapp.com','https://e-commerce-shop-back.herokuapp.com/api/user/login']
 
 const corsOptions = {
     credentials: true,
     origin: function (origin, callback) {
-    // if (whitelist.indexOf(origin) !== -1 || !origin) {
-        if (1) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
       callback(null, true)
     } else {
       callback(new Error('Not allowed by CORS'))
