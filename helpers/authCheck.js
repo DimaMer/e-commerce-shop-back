@@ -4,7 +4,7 @@
 // const jwt         = require('jsonwebtoken');
 exports.checkIfAuthenticated = (req, res, next) =>{
   const {user}= req;
-
+console.log(user)
   if (user.role == 'admin') return next ();
 
   // const a = jwt.verify(req.query.id, process.env.SECRET, (err, data) => {
@@ -22,6 +22,7 @@ exports.checkIfAuthenticated = (req, res, next) =>{
 
 exports.isAdmin = (req, res, next) => {
   const {user}= req;
+  console.log(req)
   if (user.role == 'admin')
     return next ();
   res.status(401).send('Only Admin');

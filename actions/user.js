@@ -15,7 +15,7 @@ exports.getUserList = async (req, res) =>{
 
 exports.getSingleUser = async (req, res) =>{
   await validateData(req);
-  const {user}= req;
+  // const {user}= req;
 
   // jwt.verify(req.query.id, process.env.SECRET,async (err, data) => {
   //   if(err) {
@@ -30,11 +30,11 @@ exports.getSingleUser = async (req, res) =>{
   //     res.status(200).json(foundedUser);
   //   }
   // });
-  if(!user){
-    const error = new Error('id не передано');
-    error.status = 404;
-    throw error;
-  }
+  // if(!user){
+  //   const error = new Error('id не передано');
+  //   error.status = 404;
+  //   throw error;
+  // }
       const foundedUser = await User.findById(user.id);
       if(!foundedUser){
         const error = new Error('Адміна з таким id не існує!');
