@@ -16,7 +16,11 @@ exports.getUserList = async (req, res) =>{
 exports.getSingleUser = async (req, res) =>{
   await validateData(req);
   const {user}= req;
-
+  if(user.id){
+    const error = new Error('Адміна з таким id не існує!');
+    error.status = 404;
+    throw error;
+  }
   // jwt.verify(req.query.id, process.env.SECRET,async (err, data) => {
   //   if(err) {
   //     res.sendStatus(403);
