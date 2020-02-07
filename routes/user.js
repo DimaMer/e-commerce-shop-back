@@ -20,9 +20,9 @@ const {checkIfAuthenticated, isAdmin} = require('../helpers/authCheck');
 const router = express.Router();
 
 router.route('/user')
-  .get(  isAdmin, catchErrors( getUserList ));
+  .get(  isAdmin,  [check('id').isMongoId()], catchErrors( getUserList ));
 router.route('/user/single')
-  .get(
+  .get(isAdmin,
         catchErrors(getSingleUser) )
   .post( uploadNone,
          [check('firstName').not().isEmpty(),
@@ -41,11 +41,11 @@ router.route('/user/login')
   .post( uploadNone, passport.authenticate('local'), catchErrors(login));
 router.route('/user/logout')
   .get( catchErrors(logout) );
-router.route('/user/reset')
-  .get( [check('email').isEmail()],
-        catchErrors(resetUserData) );
-router.route('/user/resetpassword')
-  .get( catchErrors(resetConfirm), passport.authenticate('local'),
-        function(req, res) { res.status(200).send('Successfuly authenticated!') });
+// router.route('/user/reset')
+//   .get( [check('email').isEmail()],
+//         catchErrors(resetUserData) );
+// router.route('/user/resetpassword')
+//   .get( catchErrors(resetConfirm), passport.authenticate('local'),
+//         function(req, res) { res.status(200).send('Successfuly authenticated!') });
 
 module.exports = router;

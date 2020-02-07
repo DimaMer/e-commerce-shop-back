@@ -15,7 +15,7 @@ exports.getUserList = async (req, res) =>{
 
 exports.getSingleUser = async (req, res) =>{
   await validateData(req);
-  // const {user}= req;
+  const {user}= req;
 
   // jwt.verify(req.query.id, process.env.SECRET,async (err, data) => {
   //   if(err) {
