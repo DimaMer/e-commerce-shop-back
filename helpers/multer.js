@@ -61,10 +61,6 @@ exports.upload =  multer({ storage }).fields([
     { name: 'photo', maxCount: 1 }
   ]);
 
-exports.uploadCv = multer({ storage }).fields([
-  { name: 'resume', maxCount: 1 }
-]);
-
 exports.uploadNone = multer().none();
 
 

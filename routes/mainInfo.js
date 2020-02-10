@@ -5,7 +5,7 @@ const {addInfo,
        editInfo,
        deleteInfo} = require('../controllers/mainInfo');
 const {catchErrors} = require('../errors/errorHandler');
-const {upload, uploads, cloud} = require('../helpers/multer');
+const {upload, cloud} = require('../helpers/multer');
 const {checkIfAuthenticated} = require('../helpers/authCheck');
 const router = express.Router();
 
@@ -18,7 +18,7 @@ router.route('/info')
   .delete(checkIfAuthenticated, [check('id').isMongoId()],
           catchErrors(deleteInfo));
 router.route('/info/update')
-.post( uploads, cloud,
+.post( upload, cloud,
       catchErrors(editInfo) )
 
 module.exports = router;
