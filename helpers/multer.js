@@ -9,6 +9,7 @@ cloudinary.config({
 const fs = require('fs');
 
 exports.cloud = (req, res, next) => {
+    if(!req.files) return next();
     let [{path}] =  req.files.photo||[{}];
     if (!path) return next()
     cloudinary.uploader.upload(path, function(image, err ) {
