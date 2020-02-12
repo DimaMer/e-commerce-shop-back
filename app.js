@@ -32,7 +32,7 @@ app.use(express.json());
 
 const graphqlHTTP = require('express-graphql')
 const schema = require('./dbconf/schema.js')
-app.use('/graphql', graphqlHTTP({
+app.use('/graphql',  graphqlHTTP({
   schema: schema,
   graphiql: true
 }))

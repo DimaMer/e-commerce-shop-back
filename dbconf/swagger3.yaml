@@ -390,6 +390,8 @@ paths:
         - in: query
           name: price
         - in: query
+          name: idLP
+        - in: query
           name: discount
         - in: query
           name: stars
@@ -1110,6 +1112,9 @@ definitions:
           en:
             type: "string"
       price:
+        type: "integer"
+        format: "int64"
+      idLP:
         type: "integer"
         format: "int64"
       discount:

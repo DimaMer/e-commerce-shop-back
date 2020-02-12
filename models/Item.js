@@ -19,6 +19,7 @@ const ItemSchema = new Schema({
   reviews: [{ type: Schema.Types.ObjectId, ref: 'ReviewItem' }],
   photos: [{ type: Schema.Types.ObjectId, ref: 'Gallery' }],
   video: { type: String },
+  idLP: { type: Number },
 
 });
 // ItemSchema.post(
