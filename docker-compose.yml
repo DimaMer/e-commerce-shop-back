@@ -7,6 +7,7 @@ services:
     build: .
     ports:
       - "7000:7000"
+    restart: always
     links:
       - mongo
   mongo:
@@ -14,5 +15,6 @@ services:
     image: mongo
     volumes:
       - ./docker/mongodata:/var/lib/mongo
+    restart: always
     ports:
       - "27018:27017"
