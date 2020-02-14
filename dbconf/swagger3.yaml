@@ -3,8 +3,10 @@ info:
   title: Ecomerse Api
   description: API.
   version: 1.0.0
-host: localhost:7000
+#host: localhost:7000
 #host: e-commerce-shop-back.herokuapp.com
+host:64.225.110.254:7000
+
 basePath: /api
 schemes:
   - https
