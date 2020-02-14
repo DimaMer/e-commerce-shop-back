@@ -1,15 +1,21 @@
-version: "2"
+version: '3'
+
+
 services:
-  app:
-    container_name: app
+  nodejs:
+    build: .
+    image: nodejs
+    container_name: nodejs
+    restart: unless-stopped
     volumes:
       - "./:/usr/src/app"
-    build: .
-    ports:
-      - "7000:7000"
-    restart: always
+    depends_on:
+      - mongo
     links:
       - mongo
+    ports:
+      - "7000:7000"
+
   mongo:
     container_name: mongo
     image: mongo
@@ -18,3 +24,44 @@ services:
     restart: always
     ports:
       - "27018:27017"
+
+  webserver:
+    image: nginx:mainline-alpine
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - web-root:/var/www/html
+      - ./nginx-conf:/etc/nginx/conf.d
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+    depends_on:
+      - nodejs
+    networks:
+      - app-network
+
+#  certbot:
+#    image: certbot/certbot
+#    container_name: certbot
+#    volumes:
+#      - certbot-etc:/etc/letsencrypt
+#      - certbot-var:/var/lib/letsencrypt
+#      - web-root:/var/www/html
+#    depends_on:
+#      - webserver
+#    command: certonly --webroot --webroot-path=/var/www/html --email kostyalopatkin777@gmail.com --agree-tos --no-eff-email --staging -d kovilook.com.ua  -d www.kovilook.com.ua
+
+volumes:
+  certbot-etc:
+  certbot-var:
+  web-root:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/e-commerce/
+      o: bind
+
+networks:
+  app-network:
+    driver: bridge
