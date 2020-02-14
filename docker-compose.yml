@@ -59,7 +59,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home//home/e-commerce/dhparam/
+      device: /home/e-commerce/dhparam/
       o: bind
   certbot-etc:
   certbot-var:
