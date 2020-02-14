@@ -31,11 +31,13 @@ services:
     restart: unless-stopped
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - web-root:/var/www/html
       - ./nginx-conf:/etc/nginx/conf.d
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
+      - dhparam:/etc/ssl/certs
     depends_on:
       - nodejs
     networks:
@@ -53,6 +55,12 @@ services:
     command: certonly --webroot --webroot-path=/var/www/html --email kostyalopatkin777@gmail.com --agree-tos --no-eff-email --staging -d kovilook.com.ua  -d www.kovilook.com.ua
 
 volumes:
+  dhparam:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home//home/e-commerce/dhparam/
+      o: bind
   certbot-etc:
   certbot-var:
   web-root:
