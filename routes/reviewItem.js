@@ -6,7 +6,7 @@ const {addReviewItem,
        editReviewItem,
        deleteReviewItem} = require('../controllers/reviewItem');
 const {catchErrors} = require('../errors/errorHandler');
-const {uploadNone, upload, convertImage, cloud} = require('../helpers/multer');
+const {uploadNone, upload, convertImage} = require('../helpers/multer');
 const {checkIfAuthenticated} = require('../helpers/authCheck');
 const router = express.Router();
 
@@ -15,7 +15,7 @@ router.route('/reviewitem')
 router.route('/reviewitem/single')
   .get( [check('id').isMongoId()],
         catchErrors(getSingleReviewItem) )
-  .post( upload,  convertImage, cloud,
+  .post( upload,  convertImage,
          [check('idItem').isMongoId()
        ],
          catchErrors(addReviewItem) )
