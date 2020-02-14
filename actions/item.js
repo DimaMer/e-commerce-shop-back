@@ -30,6 +30,13 @@ exports.getItemList = async (req, res) => {
             {page: parseInt(page) || 1, limit: parseInt(limit) || 100}
         )
     }
+    else if (filter.titleUnique) {
+        itemList = await Item.paginate(
+            Item.find(filter).populate('photos').populate('reviews').sort(sortValid),
+            {page: parseInt(page) || 1, limit: parseInt(limit) || 100}
+        )
+    }
+
     else if (filter.title) {
     filter.title = {$regex: filter.title + '.*', $options: 'i'}
 

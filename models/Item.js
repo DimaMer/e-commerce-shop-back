@@ -5,6 +5,7 @@ const {Category} = require('../models/Category');
 
 const ItemSchema = new Schema({
   title: { ua: String, ru: String, en: String  },
+  titleUnique: { type: String, required: true},
   titleUpper: {  ua: String, ru: String, en: String   },
   description: { ua: String, ru: String, en: String   },
   titleLong: { type:{ ua: String, ru: String, en: String }, required: true },
