@@ -6,7 +6,7 @@ info:
 #host: localhost:7000
 #host: e-commerce-shop-back.herokuapp.com
 #host: 64.225.110.254:7000
-host: kovilook.com.ua/api
+host: kovilook.com.ua
 basePath: /api
 schemes:
   - https
