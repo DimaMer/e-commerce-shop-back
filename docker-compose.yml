@@ -13,8 +13,8 @@ services:
       - mongo
     links:
       - mongo
-    ports:
-      - "7000:7000"
+    networks:
+      - app-network
 
   mongo:
     container_name: mongo
@@ -22,6 +22,8 @@ services:
     volumes:
       - ./docker/mongodata:/var/lib/mongo
     restart: always
+    networks:
+      - app-network
     ports:
       - "27018:27017"
 
