@@ -78,7 +78,7 @@ volumes:
     driver_opts:
       type: none
 #      device: /home/dima/Documents/projects/magi/e-commerce-shop/e-commerce-shop-back/
-      device: /home/e-commerce/
+       device: /home/e-commerce/
       o: bind
   mongo-data:
     driver: local
