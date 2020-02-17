@@ -12,7 +12,7 @@ const ItemSchema = new Schema({
   category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
   subCategory: { type: Schema.Types.ObjectId, ref: 'SubCategory', required: true },
   price: { type: Number },
-  discount: { type: String },
+  discount: { type: Number },
   isPopular: {type: Boolean, default: false},
   stars: { type: Number },
   dateCreateItem: { type: Date, required: true, default: Date.now},
