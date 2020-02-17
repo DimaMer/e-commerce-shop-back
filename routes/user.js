@@ -22,20 +22,20 @@ const router = express.Router();
 router.route('/user')
   .get(  isAdmin,  [check('id').isMongoId()], catchErrors( getUserList ));
 router.route('/user/single')
-  .get(isAdmin,
+  .get(checkIfAuthenticated,
         catchErrors(getSingleUser) )
-  .post( uploadNone,
+  .post( uploadNone, isAdmin,
          [check('firstName').not().isEmpty(),
           check('lastName').not().isEmpty(),
           check('email').isEmail(),
           check('password').isLength({ min: 4 })],
          catchErrors(addUser) )
-  .put( uploadNone,
+  .put( uploadNone, isAdmin,
         [check('id').isMongoId(),
          check('email').if(check('email').exists()).isEmail(),
          check('password').if(check('password').exists()).isLength({ min: 4 })],
          catchErrors(editUser) )
-  .delete( [check('id').isMongoId()],
+  .delete( isAdmin, [check('id').isMongoId()],
            catchErrors(deleteUser));
 router.route('/user/login')
   .post( uploadNone, passport.authenticate('local'), catchErrors(login));

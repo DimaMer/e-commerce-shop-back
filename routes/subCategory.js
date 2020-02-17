@@ -7,7 +7,7 @@ const {addSubCategory,
        deleteSubCategory} = require('../controllers/subCategory');
 const {catchErrors} = require('../errors/errorHandler');
 const {uploadNone} = require('../helpers/multer');
-const {checkIfAuthenticated} = require('../helpers/authCheck');
+const {checkIfAuthenticated, isAdmin} = require('../helpers/authCheck');
 const router = express.Router();
 
 router.route('/subCategory')
@@ -17,17 +17,17 @@ router.route('/subCategory/single')
   .get( [check('id').isMongoId(),
          check('catId').isMongoId()],
         catchErrors(getSingleSubCategory) )
-  .post(checkIfAuthenticated,  uploadNone,
+  .post(isAdmin,  uploadNone,
          [check('_id').isMongoId(),
          check('name').not().isEmpty()],
          catchErrors(addSubCategory) )
-  .put(checkIfAuthenticated,  uploadNone,
+  .put(isAdmin,  uploadNone,
         [check('_id').isMongoId(),
          check('catId').isMongoId(),
          check('name').not().isEmpty()
          ],
         catchErrors(editSubCategory) )
-  .delete(checkIfAuthenticated, [check('catId').isMongoId(),
+  .delete(isAdmin, [check('catId').isMongoId(),
            check('subCatId').isMongoId()],
           catchErrors(deleteSubCategory));
 

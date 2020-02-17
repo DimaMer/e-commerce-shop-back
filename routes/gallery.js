@@ -8,18 +8,18 @@ const {addGallery,
 
 const {catchErrors} = require('../errors/errorHandler');
 const { upload, convertImage } = require('../helpers/multer');
-const {checkIfAuthenticated} = require('../helpers/authCheck');
+const {isAdmin, checkIfAuthenticated} = require('../helpers/authCheck');
 const router = express.Router();
 
 router.route('/gallery')
     .get(catchErrors(getGalleryList));
 router.route('/gallery/update')
-.post(  upload, catchErrors(editGallery) )
+.post(  upload, isAdmin, convertImage, catchErrors(editGallery) )
 router.route('/gallery/single')
     .get( [check('id').isMongoId()],
         catchErrors(getSingleGallery) )
-    .post(  upload, convertImage,   catchErrors(addGallery) )
-    .delete( [check('id').isMongoId()],
+    .post(  upload, isAdmin, convertImage,   catchErrors(addGallery) )
+    .delete( isAdmin, [check('id').isMongoId()],
         catchErrors(deleteGallery));
 
 module.exports = router;

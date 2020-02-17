@@ -31,12 +31,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 
-const graphqlHTTP = require('express-graphql')
-const schema = require('./dbconf/schema.js')
-app.use('/graphql',  graphqlHTTP({
-  schema: schema,
-  graphiql: true
-}))
+// const graphqlHTTP = require('express-graphql')
+// const schema = require('./dbconf/schema.js')
+// app.use('/graphql',  graphqlHTTP({
+//   schema: schema,
+//   graphiql: true
+// }))
 
 
 
@@ -45,7 +45,8 @@ app.use('/graphql',  graphqlHTTP({
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./dbconf/swagger3.yaml');
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+ app.use( '/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 const session = require('express-session');

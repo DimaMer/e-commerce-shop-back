@@ -7,7 +7,7 @@ const {addCategory,
        deleteCategory} = require('../controllers/category');
 const {catchErrors} = require('../errors/errorHandler');
 const {upload} = require('../helpers/multer');
-const {checkIfAuthenticated} = require('../helpers/authCheck');
+const {isAdmin, checkIfAuthenticated} = require('../helpers/authCheck');
 const router = express.Router();
 
 router.route('/category')
@@ -15,16 +15,16 @@ router.route('/category')
 router.route('/category/single')
   .get( [check('id').isMongoId()],
         catchErrors(getSingleCategory) )
-  .post(checkIfAuthenticated,
+  .post(isAdmin,
          [check('name.ua').not().isEmpty(),
          check('name.en').not().isEmpty(),
          check('name.ru').not().isEmpty()
          ],
          catchErrors(addCategory) )
-  .put(checkIfAuthenticated,
+  .put(isAdmin,
         [check('id').isMongoId()],
         catchErrors(editCategory) )
-  .delete(checkIfAuthenticated, [check('id').isMongoId()],
+  .delete(isAdmin, [check('id').isMongoId()],
           catchErrors(deleteCategory));
 
 module.exports = router;

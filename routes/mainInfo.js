@@ -6,19 +6,19 @@ const {addInfo,
        deleteInfo} = require('../controllers/mainInfo');
 const {catchErrors} = require('../errors/errorHandler');
 const {upload} = require('../helpers/multer');
-const {checkIfAuthenticated} = require('../helpers/authCheck');
+const {isAdmin, checkIfAuthenticated} = require('../helpers/authCheck');
 const router = express.Router();
 
 router.route('/info')
   .get( catchErrors(getInfo) )
-  .post( upload,
+  .post( upload, isAdmin,
          catchErrors(addInfo) )
   // .post( uploads, cloud,
   //       catchErrors(editInfo) )
-  .delete(checkIfAuthenticated, [check('id').isMongoId()],
+  .delete(isAdmin, [check('id').isMongoId()],
           catchErrors(deleteInfo));
 router.route('/info/update')
-.post( upload,
+.post( upload, isAdmin,
       catchErrors(editInfo) )
 
 module.exports = router;

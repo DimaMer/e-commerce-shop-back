@@ -7,7 +7,7 @@ const {addItem,
        deleteItem} = require('../controllers/item');
 const {catchErrors} = require('../errors/errorHandler');
 const {uploadNone, upload} = require('../helpers/multer');
-const {checkIfAuthenticated} = require('../helpers/authCheck');
+const {isAdmin, checkIfAuthenticated} = require('../helpers/authCheck');
 const router = express.Router();
 
 router.route('/item')
@@ -15,17 +15,17 @@ router.route('/item')
 router.route('/item/single')
   .get(  [check('id').isMongoId()],
         catchErrors(getSingleItem) )
-  .post(upload,
+  .post(upload, isAdmin,
          // [
       // check('firstName').not().isEmpty(),
          // check('email').if(check('email').exists()).isEmail(),
          // check('phone').isInt().isLength({ min: 6 })
          //     ],
          catchErrors(addItem) )
-  .put(checkIfAuthenticated,  uploadNone,
+  .put(isAdmin,  uploadNone,
         [check('id').isMongoId(),
          ], catchErrors(editItem) )
-  .delete(checkIfAuthenticated, [check('id').isMongoId()],
+  .delete(isAdmin, [check('id').isMongoId()],
           catchErrors(deleteItem));
 
 module.exports = router;
