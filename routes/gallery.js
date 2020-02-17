@@ -14,7 +14,7 @@ const router = express.Router();
 router.route('/gallery')
     .get(catchErrors(getGalleryList));
 router.route('/gallery/update')
-.post(  upload, isAdmin, convertImage, catchErrors(editGallery) )
+.post(  isAdmin, upload, convertImage, catchErrors(editGallery) )
 router.route('/gallery/single')
     .get( [check('id').isMongoId()],
         catchErrors(getSingleGallery) )

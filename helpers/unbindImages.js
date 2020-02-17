@@ -5,7 +5,7 @@ exports.unbindImageByAddress = async function (imageAddress) {
   const fileExist = fs.existsSync(`./${imageAddress}`);
     console.log('dddddddd',fileExist, imageAddress);
     if(imageAddress && fileExist){
-      fs.unlink(`public${imageAddress}`, (err) => {
+      fs.unlink(`./${imageAddress}`, (err) => {
         if (err){
           throw err;
         }
