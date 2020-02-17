@@ -4,7 +4,7 @@ const mongoosePaginate = require('mongoose-paginate');
 const {Category} = require('../models/Category');
 
 const ItemSchema = new Schema({
-  title: { ua: String, ru: String, en: String, required: true },
+  title: { ua: String, ru: String, en: String },
   titleUnique: { type: String, defaults: "empty"},
   titleUpper: {  ua: String, ru: String, en: String   },
   description: { ua: String, ru: String, en: String   },
