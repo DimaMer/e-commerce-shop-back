@@ -6,21 +6,20 @@ console.log(__dirname+ '/public');
 app.use(express.static(__dirname + '/public'));
 
 // const whitelist = [/inary\.com$/,'http://64.225.110.254:7000/','"http://64.225.110.254:7000/api/','"http://64.225.110.254:7000/','http://64.225.110.254','http://64.225.110.254/',/0$/,'http://sub.linprog.com','https://cloudinary.com','http://e-commerce-front.herokuapp.com','http://localhost:7000','http://localhost:3000',/.ngrok\.com$/, 'http://2b606649.ngrok.io', 'https://e-commerce-shop-back.herokuapp.com','https://e-commerce-shop-back.herokuapp.com/api/user/login']
-const whitelist = ['http://sub.linprog.com','https://sub.linprog.com','http://localhost:7000','http://localhost:3000','http://localhost', 'https://kovilook.com.ua']
+const whitelist = ['http://sub.linprog.com','https://sub.linprog.com','http://localhost:7000','http://localhost:3000', 'https://kovilook.com.ua']
 
 const corsOptions = {
     credentials: true,
     origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
-        console.log ('origin', origin)
         // if (1){
       callback(null, true)
     } else {
-        console.log ('origin', origin)
       callback(new Error('Not allowed by CORS'))
     }
   }
 }
+app.use(cors(corsOptions));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
