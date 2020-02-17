@@ -2,9 +2,9 @@ const multer = require('multer');
 const sharp = require('sharp');
 const cloudinary  = require('cloudinary')
 cloudinary.config({
-  cloud_name: 'dtmqswql7',
-  api_key: '441733751616911',
-  api_secret: 'NrPljZnLRI5HxIRTytVOwiBaQy0',
+  cloud_name: 'PUTnAME',
+  api_key: 'API_KEY',
+  api_secret: 'API_SECRET',
 });
 const fs = require('fs');
 

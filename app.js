@@ -4,14 +4,9 @@ require('dotenv').config({path:'./variables.env'});
 const app = express();
 console.log(__dirname+ '/public');
 app.use(express.static(__dirname + '/public'));
-// app.use (cors ({
-//   origin: 'http://localhost:3000'
-// }));
 
-// const cors = require('cors');
 // const whitelist = [/inary\.com$/,'http://64.225.110.254:7000/','"http://64.225.110.254:7000/api/','"http://64.225.110.254:7000/','http://64.225.110.254','http://64.225.110.254/',/0$/,'http://sub.linprog.com','https://cloudinary.com','http://e-commerce-front.herokuapp.com','http://localhost:7000','http://localhost:3000',/.ngrok\.com$/, 'http://2b606649.ngrok.io', 'https://e-commerce-shop-back.herokuapp.com','https://e-commerce-shop-back.herokuapp.com/api/user/login']
 const whitelist = ['http://sub.linprog.com','https://sub.linprog.com','http://localhost:7000','http://localhost:3000', 'https://kovilook.com.ua']
-
 
 const corsOptions = {
     credentials: true,
@@ -24,11 +19,7 @@ const corsOptions = {
     }
   }
 }
-app.use(cors(corsOptions));
-// app.use(cors({
-//    credentials: true,
-//   // origin: 'http://localhost:3000'
-//  }));
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
