@@ -21,7 +21,6 @@ exports.checkIfAuthenticated = (req, res, next) =>{
 
 exports.isAdmin = (req, res, next) => {
   const {user}= req;
-  console.log(user)
   if (user&&user.role == 'admin')
     return next ();
   res.status(401).send('Only Admin');
