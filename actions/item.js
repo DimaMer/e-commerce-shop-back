@@ -3,8 +3,10 @@ const {Item, ItemSchema} = require('../models/Item');
 const {updateEntity} = require('../helpers/entityUpdater');
 const {ReviewItem} = require('../models/ReviewItem');
 const {Gallery} = require('../models/Gallery');
+const {deleteGallery} = require('./gallery');
 const {Category} = require('../models/Category');
 const {SubCategory} = require('../models/SubCategory');
+const {unbindImageByAddress}= require('../helpers/unbindImages');
 const _ = require('lodash');
 
 exports.getItemList = async (req, res) => {
@@ -121,7 +123,12 @@ exports.editItem = async (req, res) => {
 exports.deleteItem = async (req, res) => {
     await validateData(req);
     await ReviewItem.deleteMany({idItem: req.query.id});
-    await Gallery.deleteMany({idItem: req.query.id});
+
+    const deletedGallery = await Gallery.deleteMany({idItem: req.query.id});
+
+    console.log ('deletedGallery',deletedGallery)
+
+    await deleteGallery(deleteGallery)
     const deletedItem = await Item.findByIdAndDelete(req.query.id);
     res.status(200).json(deletedItem);
 }
