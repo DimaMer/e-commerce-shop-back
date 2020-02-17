@@ -124,15 +124,16 @@ exports.deleteItem = async (req, res) => {
     await validateData(req);
     await ReviewItem.deleteMany({idItem: req.query.id});
     const deletedGallery = await Gallery.find({idItem: req.query.id});
+
     await Gallery.deleteMany({idItem: req.query.id});
     if (deletedGallery) {}
 
-
-    _.findKey(deletedGallery, async function(chr) {
-        console.log ('deletedGallery',chr.photo)
-        await unbindImageByAddress(chr.photo)
-        return chr;
+    console.log ('deletedGallery',deletedGallery)
+    _.forIn(deletedGallery, async function(value, key) {
+        console.log ('deletedGallery',value.photo)
+        await unbindImageByAddress(value.photo)
     });
+
 
 
 
@@ -141,5 +142,7 @@ exports.deleteItem = async (req, res) => {
 
     await deleteGallery(deleteGallery)
     const deletedItem = await Item.findByIdAndDelete(req.query.id);
+
+
     res.status(200).json(deletedItem);
 }
