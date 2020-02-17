@@ -21,6 +21,6 @@ router.route('/gallery/single')
     .post(  upload, isAdmin, convertImage,   catchErrors(addGallery) )
     .delete( isAdmin, [check('id').isMongoId()],
         catchErrors(deleteGallery));
-router.route('/galleryClear')
-    .get(catchErrors(galleryClear));
+// router.route('/galleryClear')
+//     .get(catchErrors(galleryClear));
 module.exports = router;

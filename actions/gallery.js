@@ -79,21 +79,21 @@ exports.editGallery = async (req, res) => {
     res.status(200).send('Success!');
 }
 
-exports.galleryClear = async (req, res) => {
-    const filter = req.query ? req.query : ''
-    const galList = await Gallery.find(filter)
-    if (galList.length !== 0)  {
-
-
-        res.status(200).json(galList)
-    } else res.status(404).json({query: filter});
-
-    if (!galList) {
-        const err = new Error('Виникла помилка при виконанні запиту!');
-        err.status = 500;
-        throw err;
-    }
-}
+// exports.galleryClear = async (req, res) => {
+//     const filter = req.query ? req.query : ''
+//     const galList = await Gallery.find(filter)
+//     if (galList.length !== 0)  {
+//
+//
+//         res.status(200).json(galList)
+//     } else res.status(404).json({query: filter});
+//
+//     if (!galList) {
+//         const err = new Error('Виникла помилка при виконанні запиту!');
+//         err.status = 500;
+//         throw err;
+//     }
+// }
 
 exports.deleteGallery = async (req, res) => {
     await validateData(req);
