@@ -16,7 +16,6 @@ exports.getUserList = async (req, res) =>{
 exports.getSingleUser = async (req, res) =>{
   await validateData(req);
   const {user}= req;
-  console.log(user._id);
   if(!user._id){
     const error = new Error('Адміна з таким id не існує!');
     error.status = 404;

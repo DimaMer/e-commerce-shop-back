@@ -6,7 +6,7 @@ const { User } = require('../models/User');
 const bcrypt = require('bcryptjs');
 
 passport.serializeUser((client, done)=>{
-  console.log(`We are going to serialize this: ${client.id}`);
+
   return done(null,client.id);
 });
 

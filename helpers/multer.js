@@ -29,7 +29,6 @@ exports.convertImage = (req, res, next) => {
     if(size>5502975) quality = 65;
     if(size>7502975) quality = 50;
 
-    console.log('compress',quality, size)
     sharp(path)
         .jpeg({
             quality: quality,
@@ -39,7 +38,6 @@ exports.convertImage = (req, res, next) => {
             if (err)return res.send(err);
             req.files.photo[0].path = "./public/photo-resize/" + req.files.photo[0].filename + ".jpg";
             fs.unlinkSync("./" + path);
-            console.log('size image',info.size);
             return next();
         })
 

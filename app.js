@@ -2,7 +2,6 @@ const cors = require('cors');
 const express    = require('express');
 require('dotenv').config({path:'./variables.env'});
 const app = express();
-console.log(__dirname+ '/public');
 app.use(express.static(__dirname + '/public'));
 
 // const whitelist = [/inary\.com$/,'http://64.225.110.254:7000/','"http://64.225.110.254:7000/api/','"http://64.225.110.254:7000/','http://64.225.110.254','http://64.225.110.254/',/0$/,'http://sub.linprog.com','https://cloudinary.com','http://e-commerce-front.herokuapp.com','http://localhost:7000','http://localhost:3000',/.ngrok\.com$/, 'http://2b606649.ngrok.io', 'https://e-commerce-shop-back.herokuapp.com','https://e-commerce-shop-back.herokuapp.com/api/user/login']
@@ -12,9 +11,6 @@ const corsOptions = {
     credentials: true,
     origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
-        // if (1){
-            console.log('origin')
-            console.log('origin', origin)
       callback(null, true)
     } else {
       callback(new Error('Not allowed by CORS'))
@@ -33,8 +29,6 @@ app.use(express.json());
 //   schema: schema,
 //   graphiql: true
 // }))
-
-
 
 
 

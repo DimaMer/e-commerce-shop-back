@@ -129,7 +129,6 @@ exports.deleteItem = async (req, res) => {
 
 
     _.forIn(deletedGallery, async function(value, key) {
-        console.log ('deletedGallery',value.photo)
         await unbindImageByAddress(value.photo)
     });
 

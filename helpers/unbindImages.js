@@ -3,7 +3,6 @@ const fs = require('fs');
    видаляється) */
 exports.unbindImageByAddress = async function (imageAddress) {
   const fileExist = fs.existsSync(`./${imageAddress}`);
-    console.log('dddddddd',fileExist, imageAddress);
     if(imageAddress && fileExist){
       fs.unlink(`./${imageAddress}`, (err) => {
         if (err){

@@ -36,10 +36,10 @@ exports.addReviewItem = async (req, res) => {
     const newReviewItemData = req.body;
     newReviewItemData.status = false;
     if (await Item.findById(newReviewItemData.idItem)) {
-        const {photo=" "} = req.files;
+        const [{path}] = req.files.photo||[{}];
 
         const newReviewItem = await new ReviewItem(newReviewItemData);
-        newReviewItem.photo = photo;
+        newReviewItem.photo = path;
         if (!newReviewItem) {
             await unbindImageByAddress(photo);
             const err = new Error('Нову фотографію не додано!');
