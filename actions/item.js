@@ -123,10 +123,20 @@ exports.editItem = async (req, res) => {
 exports.deleteItem = async (req, res) => {
     await validateData(req);
     await ReviewItem.deleteMany({idItem: req.query.id});
+    const deletedGallery = await Gallery.find({idItem: req.query.id});
+    if (deletedGallery) {}
+    await Gallery.deleteMany({idItem: req.query.id});
 
-    const deletedGallery = await Gallery.deleteMany({idItem: req.query.id});
+    _.findKey(deletedGallery, async function(chr) {
+        console.log ('deletedGallery',chr.photo)
+        await unbindImageByAddress(chr.photo)
+        return chr;
+    });
 
-    console.log ('deletedGallery',deletedGallery)
+
+}
+
+
 
     await deleteGallery(deleteGallery)
     const deletedItem = await Item.findByIdAndDelete(req.query.id);
