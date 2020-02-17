@@ -11,8 +11,8 @@ const whitelist = ['http://sub.linprog.com','https://sub.linprog.com','http://lo
 const corsOptions = {
     credentials: true,
     origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-        // if (1){
+    // if (whitelist.indexOf(origin) !== -1 || !origin) {
+        if (1){
       callback(null, true)
     } else {
       callback(new Error('Not allowed by CORS'))
