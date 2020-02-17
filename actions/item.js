@@ -3,7 +3,6 @@ const {Item, ItemSchema} = require('../models/Item');
 const {updateEntity} = require('../helpers/entityUpdater');
 const {ReviewItem} = require('../models/ReviewItem');
 const {Gallery} = require('../models/Gallery');
-const {deleteGallery} = require('./gallery');
 const {Category} = require('../models/Category');
 const {SubCategory} = require('../models/SubCategory');
 const {unbindImageByAddress}= require('../helpers/unbindImages');
@@ -128,19 +127,12 @@ exports.deleteItem = async (req, res) => {
     await Gallery.deleteMany({idItem: req.query.id});
     if (deletedGallery) {}
 
-    console.log ('deletedGallery',deletedGallery)
+
     _.forIn(deletedGallery, async function(value, key) {
         console.log ('deletedGallery',value.photo)
         await unbindImageByAddress(value.photo)
     });
 
-
-
-
-
-
-
-    await deleteGallery(deleteGallery)
     const deletedItem = await Item.findByIdAndDelete(req.query.id);
 
 
