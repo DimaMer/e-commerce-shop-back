@@ -1,5 +1,5 @@
 const multer = require('multer');
-const sharp = require('sharp');
+// const sharp = require('sharp');
 const cloudinary  = require('cloudinary')
 cloudinary.config({
   cloud_name: 'PUTnAME',
@@ -52,7 +52,7 @@ const storage = multer.diskStorage({
     return cb(null, `public/${file.fieldname}`);
   },
   filename: (req, file, cb) => {
-      return cb(null, `${file.fieldname}-${Date.now()}-${file.originalname}`);
+      return cb(null, `${file.fieldname}-${Date.now()}-${file.originalname.replace("_", " ")}`);
   },
 });
 
